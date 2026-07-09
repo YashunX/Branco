@@ -1,59 +1,102 @@
-import { FileText, Calendar, Clock } from "lucide-react";
+import { ImageIcon } from "lucide-react";
+import Image from "next/image";
 
 export default function Docs() {
+  const meetingNotes = [
+    {
+      id: "IMG_1223.jpg",
+      title: "プロジェクトの全体テーマ",
+      content: "・テーマ: 「応援」\n・コアコンセプト: デジタルデトックス\n・着眼点: 「自分たちから離れる」、意志が弱い人のための仕組み",
+      tags: ["コンセプト", "テーマ"]
+    },
+    {
+      id: "IMG_1224.jpg",
+      title: "「推し」によるアプローチ案",
+      content: "・従来の「アプリ通知」や「強制シャットダウン」はネガティブ。\n・「推し」が応援してくれる仕組みはどうか？\n・「頑張って！」と声をかけてもらうポジティブな動機付け。",
+      tags: ["アイデア", "推し"]
+    },
+    {
+      id: "IMG_1225.jpg",
+      title: "「仲間・連帯責任」によるアプローチ案",
+      content: "・「仲間」と一緒にデトックスを行う\n・「連帯責任」というプレッシャー（ピアプレッシャー）を逆手に取る",
+      tags: ["アイデア", "仲間"]
+    },
+    {
+      id: "IMG_1226.jpg",
+      title: "「ゲーミフィケーション」によるアプローチ案",
+      content: "・育成要素（ゲーミフィケーション）を取り入れる\n・スマホを触らない時間でキャラクターが育つ\n・既存アプリ（Forestなど）に近いアプローチ",
+      tags: ["アイデア", "ゲーミフィケーション"]
+    },
+    {
+      id: "IMG_1227.jpg",
+      title: "代替行動（オフライン）への誘導",
+      content: "・デジタルから離れた時間に「何をするか」の提案が重要\n・例: 読書、散歩、睡眠など\n・新しいリアルな体験への誘導をセットにする",
+      tags: ["提供価値", "代替行動"]
+    },
+    {
+      id: "IMG_1228.jpg",
+      title: "提供価値：自己肯定感の向上",
+      content: "・提供する本質的な価値は「自己肯定感」の向上\n・スマホを見ない＝「えらい！」と褒められる体験\n・小さな成功体験の積み重ねをデザインする",
+      tags: ["提供価値", "自己肯定感"]
+    },
+    {
+      id: "IMG_1229.jpg",
+      title: "ターゲットペルソナと課題感",
+      content: "・ターゲット: 大学生〜20代社会人\n・課題: スマホ依存、SNS疲れ\n・背景: 「タイパ（タイムパフォーマンス）重視」による精神的な疲弊",
+      tags: ["ターゲット", "課題"]
+    },
+    {
+      id: "IMG_1230.jpg",
+      title: "「応援」の再定義",
+      content: "・応援とは何か？\n・「見守る」「一緒に走る」「褒める」「物理的なご褒美をあげる」など、応援の形を定義",
+      tags: ["定義", "応援"]
+    },
+    {
+      id: "IMG_1232.jpg",
+      title: "ネクストアクション",
+      content: "・ペルソナをもっと具体的にする\n・「なぜ（既存のアプリを使っても）失敗するのか」をもっと深掘りする\n・インサイトの特定が急務",
+      tags: ["ネクストアクション", "重要"]
+    }
+  ];
+
   return (
     <div className="animate-in">
-      <h1>プロジェクト・ドキュメント</h1>
-      <p className="subtitle">BranCo! 2026 プロジェクト関連資料</p>
-      
-      <div className="card delay-1" style={{ marginTop: '32px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '10px', borderRadius: '12px' }}>
-              <FileText size={24} color="var(--accent-primary)" />
+      <h1>ミーティング議事録（画像アーカイブ）</h1>
+      <p className="subtitle">ホワイトボード写真ごとの文字起こしと内容の整理</p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', marginTop: '32px' }}>
+        {meetingNotes.map((note, index) => (
+          <div key={note.id} className={`card delay-${(index % 3) + 1}`} style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
+            {/* Image Section */}
+            <div style={{ flex: '0 0 300px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-color)', position: 'relative', aspectRatio: '4/3', backgroundColor: 'rgba(0,0,0,0.2)' }}>
+              <Image 
+                src={`/${note.id}`} 
+                alt={note.title} 
+                fill 
+                style={{ objectFit: 'cover' }} 
+              />
             </div>
-            <div>
-              <h2 style={{ marginBottom: 0 }}>初期ミーティング議事録まとめ</h2>
-              <div style={{ display: 'flex', gap: '16px', color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '4px' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Calendar size={14} /> 2026-07-09</span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Clock size={14} /> 抽出元: ホワイトボード画像9枚</span>
+            
+            {/* Content Section */}
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <ImageIcon size={20} color="var(--accent-primary)" />
+                <h3 style={{ margin: 0 }}>{note.id}</h3>
+                <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>- {note.title}</span>
+              </div>
+              
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                {note.tags.map(tag => (
+                  <span key={tag} className="badge">{tag}</span>
+                ))}
+              </div>
+              
+              <div style={{ color: 'var(--text-secondary)', lineHeight: '1.8', whiteSpace: 'pre-wrap', fontSize: '0.95rem' }}>
+                {note.content}
               </div>
             </div>
           </div>
-          <span className="badge">初期案</span>
-        </div>
-        
-        <div className="doc-content" style={{ lineHeight: '1.8' }}>
-          <h3 style={{ color: 'var(--accent-primary)', marginBottom: '12px', marginTop: '24px' }}>🎯 ターゲット・課題</h3>
-          <ul style={{ paddingLeft: '24px', marginBottom: '24px', color: 'var(--text-secondary)' }}>
-            <li style={{ marginBottom: '8px' }}><strong>対象:</strong> 大学生〜20代社会人</li>
-            <li style={{ marginBottom: '8px' }}><strong>課題感:</strong> スマホ依存、SNS疲れ、タイパ（タイムパフォーマンス）重視による精神的な疲弊</li>
-            <li style={{ marginBottom: '8px' }}><strong>状態:</strong> 意志が弱く、デジタルデトックス（自分たちから離れること）が一人ではうまくいかない</li>
-          </ul>
-
-          <h3 style={{ color: 'var(--accent-primary)', marginBottom: '12px', marginTop: '24px' }}>💡 「応援」のアプローチ案</h3>
-          <ul style={{ paddingLeft: '24px', marginBottom: '24px', color: 'var(--text-secondary)' }}>
-            <li style={{ marginBottom: '8px' }}><strong>「推し」からの応援:</strong> 単なる制限ではなく、「推し」が「頑張って！」と声をかけてくれる（強制シャットダウンではなくポジティブな動機付け）</li>
-            <li style={{ marginBottom: '8px' }}><strong>仲間との連帯責任:</strong> 一人ではなく、「仲間と一緒にデトックス」する仕組み</li>
-            <li style={{ marginBottom: '8px' }}><strong>ゲーミフィケーション:</strong> スマホを触らない時間でキャラクターが育つ育成要素（※例：Forestのような仕組み）</li>
-            <li style={{ marginBottom: '8px' }}><strong>代替行動への誘導:</strong> デジタルから離れた時間に「何をするか」（読書、散歩、睡眠など、新しい体験）をセットで提供する</li>
-          </ul>
-
-          <h3 style={{ color: 'var(--accent-primary)', marginBottom: '12px', marginTop: '24px' }}>🎁 提供価値（提供されるもの）</h3>
-          <ul style={{ paddingLeft: '24px', marginBottom: '24px', color: 'var(--text-secondary)' }}>
-            <li style={{ marginBottom: '8px' }}>スマホを見ない＝「えらい！」と褒められる体験</li>
-            <li style={{ marginBottom: '8px' }}>小さな成功体験の積み重ねによる<strong>「自己肯定感」の向上</strong></li>
-            <li style={{ marginBottom: '8px' }}>物理的なご褒美、見守り、一緒に走る感覚</li>
-          </ul>
-
-          <h3 style={{ color: 'var(--accent-primary)', marginBottom: '12px', marginTop: '24px' }}>🚀 ネクストアクション（AI壁打ち中）</h3>
-          <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '16px', borderRadius: '8px', borderLeft: '4px solid var(--accent-secondary)' }}>
-            <p style={{ margin: 0, color: 'var(--text-primary)' }}>
-              <strong>「なぜ失敗するのか」をもっと深掘りする（ペルソナの具体化）</strong><br/>
-              既存の制限アプリやForestのようなツールがあっても、結局パスワードを解除してしまったりする理由（心の中の言い訳や、無意識に触ってしまう瞬間）を解像度高く言語化し、本質的なインサイト（INPUT）を発見する。
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
