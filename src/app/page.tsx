@@ -1,76 +1,171 @@
-import { Activity, Target, Lightbulb, Users } from "lucide-react";
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  BookOpen,
+  CalendarDays,
+  CheckCircle2,
+  Clock3,
+  Compass,
+  FileText,
+  Sparkles,
+} from "lucide-react";
+
+const timeline = [
+  ["08/27", "プレ審査・チーム登録", "12:00", "next"],
+  ["09/18", "結果発表 / Academy kickoff", "19:00", ""],
+  ["10/21", "一次審査：動画・資料提出", "12:00", ""],
+  ["12/15", "二次審査：資料提出", "12:00", ""],
+  ["12/19", "二次審査プレゼン / 決勝", "東大駒場", ""],
+];
 
 export default function Home() {
   return (
-    <div className="animate-in">
-      <h1>Project Dashboard</h1>
-      <p className="subtitle">BranCo! 2026 「応援」 - デジタルデトックス プロジェクト</p>
-
-      <div className="grid-layout">
-        {/* Current Focus */}
-        <div className="card delay-1">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-            <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '10px', borderRadius: '12px' }}>
-              <Target size={24} color="#ef4444" />
-            </div>
-            <h3>現在のフォーカス</h3>
-          </div>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            ターゲットペルソナの具体化と「なぜ制限アプリでもデトックスに失敗するのか」のインサイト発掘。
-          </p>
-          <span className="badge">INPUT Phase</span>
+    <div className="page-shell">
+      <section className="hero">
+        <div className="eyebrow">
+          <span /> BRANCO! 15TH / 2026
         </div>
-
-        {/* Core Concept */}
-        <div className="card delay-2">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-            <div style={{ background: 'rgba(139, 92, 246, 0.1)', padding: '10px', borderRadius: '12px' }}>
-              <Lightbulb size={24} color="#8b5cf6" />
-            </div>
-            <h3>コアコンセプト案</h3>
+        <div className="hero-head">
+          <div>
+            <h1>
+              応援を、<em>つくりなおす。</em>
+            </h1>
+            <p>
+              第15回
+              BranCo!「応援」｜調査・発想・アウトプットをつなぐ、チームのワークスペース。
+            </p>
           </div>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            「推し」の応援、仲間との連帯責任、ゲーミフィケーションを通じて小さな成功体験と自己肯定感を提供する。
-          </p>
-          <span className="badge">PROCESS Phase</span>
+          <Link href="/research" className="primary-link">
+            最新の調査を見る <ArrowUpRight size={17} />
+          </Link>
         </div>
-
-        {/* Latest Activity */}
-        <div className="card delay-3">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-            <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '10px', borderRadius: '12px' }}>
-              <Activity size={24} color="#10b981" />
-            </div>
-            <h3>最新のハーネス実行</h3>
-          </div>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            レポート #001: 議事録のAI解析による初期コンセプトの整理とネクストアクションの策定。
-          </p>
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Just now</span>
-            <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10b981' }}></div>
-            <span style={{ fontSize: '0.85rem', color: '#10b981' }}>Active</span>
-          </div>
+        <div className="hero-note">
+          <Sparkles size={16} /> 今夜のハーネスループ
+          #002：公式ブリーフを読み込み、既存案を再解釈しました。
         </div>
-      </div>
-
-      <h2 style={{ marginTop: '48px', marginBottom: '24px' }} className="animate-in delay-3">
-        アクションアイテム
-      </h2>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} className="animate-in delay-3">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', background: 'var(--bg-glass)', border: '1px solid var(--border-color)', borderRadius: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Users color="var(--accent-primary)" />
+      </section>
+      <section className="signal-grid">
+        <article className="signal-card theme-card">
+          <span className="card-label">THIS YEAR&apos;S THEME</span>
+          <h2>応援</h2>
+          <p>
+            誰が、何を、どんな距離から支えるのか。変化する「応援」の意味を生活者から見つめ直す。
+          </p>
+          <Link href="/research#brief" className="text-link">
+            公式ブリーフを読む <ArrowUpRight size={15} />
+          </Link>
+        </article>
+        <article className="signal-card">
+          <span className="card-label">IMMEDIATE DEADLINE</span>
+          <div className="deadline">
+            <strong>08.27</strong>
+            <span>
+              THU
+              <br />
+              12:00
+            </span>
+          </div>
+          <p>チームメンバー登録・プレ審査書類提出。締切まであとわずかです。</p>
+          <span className="urgency">
+            <Clock3 size={14} /> NEXT MILESTONE
+          </span>
+        </article>
+        <article className="signal-card">
+          <span className="card-label">HARNESS STATUS</span>
+          <div className="run-status">
+            <i /> RESEARCH SYNTHESIZED
+          </div>
+          <p>
+            公式要件と過去のデトックス案を統合。次の発散テーマを3本、用意しました。
+          </p>
+          <Link href="/reports" className="text-link">
+            生成結果をプレビュー <ArrowUpRight size={15} />
+          </Link>
+        </article>
+      </section>
+      <section className="content-split">
+        <div className="section-block">
+          <div className="section-heading">
             <div>
-              <h4 style={{ fontWeight: 600 }}>1. 深掘りクエスチョンの回答</h4>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>チームメンバーで「なぜスマホ制限を破ってしまうのか」の理由を出し合う。</p>
+              <span className="card-label">THE ROUTE</span>
+              <h2>コンテストまでの航路</h2>
             </div>
+            <CalendarDays size={21} />
           </div>
-          <button style={{ padding: '8px 16px', background: 'var(--accent-primary)', color: '#fff', borderRadius: '8px', fontWeight: 500 }}>
-            回答する
-          </button>
+          <div className="timeline">
+            {timeline.map(([date, title, meta, state]) => (
+              <div className={`timeline-row ${state}`} key={date}>
+                <strong>{date}</strong>
+                <span>{title}</span>
+                <small>{meta}</small>
+              </div>
+            ))}
+          </div>
+          <Link href="/research#schedule" className="text-link">
+            日程と応募要項を確認 <ArrowUpRight size={15} />
+          </Link>
         </div>
-      </div>
+        <div className="section-block loop-block">
+          <div className="section-heading">
+            <div>
+              <span className="card-label">IMPROVEMENT LOOP</span>
+              <h2>今夜の生成フロー</h2>
+            </div>
+            <Compass size={21} />
+          </div>
+          <ol className="loop-list">
+            <li>
+              <b>01</b>
+              <div>
+                <strong>INPUT</strong>
+                <span>公式ブリーフ・締切・過去受賞作を収集</span>
+              </div>
+              <CheckCircle2 size={17} />
+            </li>
+            <li>
+              <b>02</b>
+              <div>
+                <strong>REFRAME</strong>
+                <span>デトックス案を「応援」の素材として保存・再解釈</span>
+              </div>
+              <CheckCircle2 size={17} />
+            </li>
+            <li>
+              <b>03</b>
+              <div>
+                <strong>CONCEPT</strong>
+                <span>新しいブランド仮説を生成・比較</span>
+              </div>
+              <span className="now">NOW</span>
+            </li>
+            <li>
+              <b>04</b>
+              <div>
+                <strong>OUTPUT</strong>
+                <span>チームに見せる最終レポートへ編集</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <section className="next-step">
+        <div>
+          <span className="card-label">NEXT ACTION</span>
+          <h2>
+            「応援」の調査を、
+            <br />
+            チームの言葉に変える。
+          </h2>
+        </div>
+        <div className="next-links">
+          <Link href="/research">
+            <BookOpen size={18} /> 調査ログ
+          </Link>
+          <Link href="/reports">
+            <FileText size={18} /> 最終レポート
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,54 +1,66 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
-import { LayoutDashboard, BookOpen, BarChart3, Settings, Zap } from "lucide-react";
+import {
+  BookOpen,
+  Compass,
+  FileText,
+  LayoutDashboard,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
+const sans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
+const serif = Noto_Serif_JP({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-serif",
+});
 
 export const metadata: Metadata = {
-  title: "BranCo! 2026 - Digital Detox Harness",
-  description: "AI Improvement Harness & Strategy Dashboard",
+  title: "BranCo! 2026 — 応援をつくりなおす",
+  description: "BranCo! の調査、ナレッジ、生成結果をつなぐチームワークスペース",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={`${sans.variable} ${serif.variable}`}>
         <div className="app-container">
           <aside className="sidebar">
-            <div className="sidebar-logo">
-              <Zap size={28} color="var(--accent-primary)" />
-              Harness
-            </div>
-            
-            <nav className="nav-links">
-              <Link href="/" className="nav-item active">
-                <LayoutDashboard size={20} />
-                Dashboard
+            <Link href="/" className="brand">
+              <Sparkles size={18} />
+              <span>
+                BranCo!<small>15TH / 2026</small>
+              </span>
+            </Link>
+            <nav>
+              <Link href="/">
+                <LayoutDashboard size={17} /> Overview
               </Link>
-              <Link href="/docs" className="nav-item">
-                <BookOpen size={20} />
-                Documents
+              <Link href="/research">
+                <Compass size={17} /> Research log
               </Link>
-              <Link href="/reports" className="nav-item">
-                <BarChart3 size={20} />
-                Reports
+              <Link href="/docs">
+                <BookOpen size={17} /> Knowledge
               </Link>
-              <Link href="/settings" className="nav-item">
-                <Settings size={20} />
-                Settings
+              <Link href="/reports">
+                <FileText size={17} /> Final report
               </Link>
             </nav>
+            <div className="sidebar-footer">
+              <span>THEME</span>
+              <strong>応援</strong>
+              <p>
+                Harness Loop
+                <br />
+                #002 · Active
+              </p>
+            </div>
           </aside>
-          
-          <main className="main-content">
-            {children}
-          </main>
+          <main className="main-content">{children}</main>
         </div>
       </body>
     </html>
