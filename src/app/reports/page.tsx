@@ -11,6 +11,7 @@ export default function Reports() {
   }).sort((a, b) => b.total - a.total);
   const sources = [...new Map(active.loops.flatMap((loop) => loop.sources).map((source) => [source.url, source])).values()];
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
+  const maxScore = scoreLabels.reduce((sum, score) => sum + score.max, 0);
 
   return <div className="page-shell report-page">
     <div className="report-top"><div>
@@ -41,7 +42,7 @@ export default function Reports() {
 
     <section className="candidate-section"><div className="section-heading"><div><span className="card-label">CURRENT PORTFOLIO / ALL GENERATED DIRECTIONS</span><h2>比較に残している候補</h2></div><span className="score-badge">{candidates.length} BRANCHES</span></div>
       <p className="rubric-intro">点数は比較の補助です。人が残したいと思う案は、低得点でもワイルドカードとして保持します。各案の詳細な生成結果はハーネスで追えます。</p>
-      <div className="candidate-grid">{candidates.map(({ branch, loop, total }) => <article key={branch.id} className={branch.id === active.id ? "candidate-card selected" : "candidate-card"}><div className="candidate-card-top"><span>{branch.status}</span><b>{total} / 100</b></div><h3>{branch.title}</h3><p className="candidate-line">{branch.premise}</p><p>{loop.diagnosis}</p><small>Loop #{loop.id} / {loop.evidence ?? "仮説"}</small></article>)}</div>
+      <div className="candidate-grid">{candidates.map(({ branch, loop, total }) => <article key={branch.id} className={branch.id === active.id ? "candidate-card selected" : "candidate-card"}><div className="candidate-card-top"><span>{branch.status}</span><b>{total} / {maxScore}</b></div><h3>{branch.title}</h3><p className="candidate-line">{branch.premise}</p><p>{loop.diagnosis}</p><small>Loop #{loop.id} / {loop.evidence ?? "仮説"}</small></article>)}</div>
     </section>
 
     <section id="trace" className="report-log"><div className="section-heading"><div><span className="card-label">RUN LOG / TRACEABILITY</span><h2>この生成の記録</h2></div><Clock3 size={20} /></div>
