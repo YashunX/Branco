@@ -2,14 +2,15 @@
 
 import { useMemo, useState } from "react";
 import { ArrowRight, GitBranch, RotateCw, ShieldCheck } from "lucide-react";
-import { type Branch, type ReviewQuestion, scoreLabels } from "../../lib/harness";
+import { type Branch, type BranchDecision, type ReviewQuestion, scoreLabels } from "../../lib/harness";
 
-type Harness = { updatedAt: string; rule: string; modelPolicy: string; submissionRule: string; reviewQuestions: ReviewQuestion[]; branches: Branch[] };
+type Harness = { updatedAt: string; rule: string; modelPolicy: string; submissionRule: string; branchingRule: string; branchDecisions: BranchDecision[]; reviewQuestions: ReviewQuestion[]; branches: Branch[] };
 
 export default function HarnessBoard({ harness }: { harness: Harness }) {
   const [branchId, setBranchId] = useState(harness.branches[0].id);
   const branch = useMemo(() => harness.branches.find((item) => item.id === branchId)!, [branchId, harness.branches]);
   const latest = branch.loops.at(-1);
+  const decision = harness.branchDecisions.find((item) => item.branchId === branch.id);
 
   return (
     <div className="page-shell harness-page">
@@ -44,6 +45,7 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
       </section> : <section className="empty-branch"><h2>この枝はまだ走らせていません。</h2><p>次のAI実行で、問い・入力・出力・診断・次の一手を追加します。</p></section>}
 
       <section className="harness-protocol"><span className="card-label">HOW AN AGENT UPDATES THIS</span><h2>次のループは、前の診断を入力にする。</h2><ol><li>この枝の「次の一手」だけを検証するために、必要最小限の調査をする。</li><li>前回の出力を捨てずに修正し、何が変わったかを明記する。</li><li>点数と人の直感を分けて記録し、伸びなければ別の枝へ切り替える。</li></ol><p>更新元：<code>src/lib/harness.ts</code>。AIコーディング環境を問わず、このデータを更新し、検証後にGitへ残します。</p></section>
+      <section className="harness-protocol"><span className="card-label">BRANCHING RULE / THE CORE LOOP</span><h2>伸びない枝を、待機状態にしない。</h2><p>{harness.branchingRule}</p>{decision && <div className="branch-decision"><b>今回の判断：{decision.verdict}</b><p>{decision.reason}</p><p><b>次の発散：</b>{decision.nextPrompt}</p></div>}</section>
 
       <section className="review-queue"><span className="card-label">INTERNAL MEMO / REVIEW QUEUE</span><h2>人の確認を待つ問い</h2><p>提出レポートには載せない内部メモです。回答が来たら、日時・相手・内容を次ループの入力に記録します。</p><div>{harness.reviewQuestions.map((item, index) => <article key={item.question}><span>{String(index + 1).padStart(2, "0")} / {item.candidate}</span><h3>{item.question}</h3><p><b>回答で変えること：</b>{item.whyItMatters}</p></article>)}</div></section>
     </div>

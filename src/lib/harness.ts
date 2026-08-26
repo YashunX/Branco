@@ -6,6 +6,7 @@ export type Loop = {
 };
 
 export type Branch = { id: string; title: string; status: "active" | "parked" | "wildcard"; premise: string; loops: Loop[] };
+export type BranchDecision = { branchId: string; verdict: "継続" | "改善" | "保留して新規発散"; reason: string; nextPrompt: string };
 
 export type PreScreenBrief = {
   id: string; title: string; role: string; line: string; background: string; tension: string; redefinition: string; question: string; input: string; concept: string; prototype: string; whyThisForm: string; presentationScene: string; validation: string; status: "人の確認待ち" | "公開情報を確認" | "保留 / 再発散待ち";
@@ -24,6 +25,13 @@ export const harness = {
   rule: "旧案を引き継がず、毎回、公開情報・生活者の緊張・応援の再定義・最初の体験を新しく組み立てる。1枝につき発散・辛口評価・改善を行い、人の直感は点数より優先して残す。",
   modelPolicy: "通常はTerraを使用。Solへの切替は、複数枝の統合判断・審査基準の再設計・最終ストーリーの矛盾解消など、深い推論が必要な局面に限定し、理由を記録する。",
   submissionRule: "各生成は、背景・人の緊張・応援の再定義・最初の体験・なぜその物か・プレ審査で見せる一場面・未検証点まで揃って初めて記録する。",
+  branchingRule: "各枝は評価ごとに、継続・改善・保留して新規発散のいずれかを必ず選ぶ。二回連続で出力の核が変わらない、または診断が同じ負債を指す時は、その枝を保留し、前枝の物・言葉・対象を引き継がない新しい生活場面から次枝を発散する。人の確認待ちは停止条件ではない。",
+  branchDecisions: [
+    { branchId: "zero-base-20260826", verdict: "保留して新規発散", reason: "三択→星群と物を変えても、初参加者の障壁を単一の会場演出で解く構造が残った。", nextPrompt: "会場・推し活・初心者という対象を引き継がず、応援が必要になる別の生活場面を公開情報から探す。" },
+    { branchId: "return-the-shade", verdict: "改善", reason: "管理責任を参加者へ移すしおりを不採用にし、許可済みの対象と運営主体を先に置けた。", nextPrompt: "人の確認が来るまで待たず、別枝で発散を続ける。人の反応が来た時だけこの枝へ戻る。" },
+    { branchId: "one-small-ask", verdict: "改善", reason: "頼む側に説明を残す依頼カードを不採用にし、支える側が余白を示す形へ反転した。", nextPrompt: "人の確認が来るまで待たず、別枝で発散を続ける。人の反応が来た時だけこの枝へ戻る。" },
+    { branchId: "unfinished-letter", verdict: "改善", reason: "失敗後に説明を求める便りを不採用にし、開始時から終わり方を共有する形へ反転した。", nextPrompt: "この枝の形式負債を再評価する間も、別枝で発散を続ける。" },
+  ] satisfies BranchDecision[],
   preScreenBriefs: [
     {
       id: "first-cheer",
