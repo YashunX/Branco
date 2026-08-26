@@ -831,6 +831,13 @@ h2 {
 .accent-paper {
   background: #f9dfd4;
 }
+.brief-preview-section { border-top: 2px solid var(--ink); margin-top: 26px; padding-top: 18px; }
+.brief-preview-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
+.brief-sheet { background: #f6f1e8; border: 1px solid var(--ink); box-shadow: 7px 7px 0 #ded6c8; padding: 22px; display: flex; flex-direction: column; min-height: 560px; }
+.brief-sheet.lead { background: #e4ece6; border-color: var(--green); box-shadow: 7px 7px 0 #bad0c2; }
+.brief-sheet header { display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: .1em; color: var(--muted); }.brief-sheet header span { color: var(--green); font-weight: 700; }.brief-sheet header small { border: 1px solid currentColor; padding: 4px 7px; }
+.brief-title { border-bottom: 1px solid var(--line); padding: 28px 0 20px; }.brief-title > span, .brief-sheet dt, .brief-sheet footer > span { display: block; font-size: 9px; letter-spacing: .13em; color: var(--green); }.brief-title h3 { font-family: var(--font-serif), serif; font-size: 34px; font-weight: 500; margin: 10px 0 8px; }.brief-title p { margin: 0; font-size: 13px; line-height: 1.65; }
+.brief-sheet dl { margin: 0; }.brief-sheet dl > div { padding: 13px 0; border-bottom: 1px solid var(--line); }.brief-sheet dt { margin-bottom: 5px; }.brief-sheet dd { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }.brief-sheet footer { margin-top: auto; background: #f3dfd7; padding: 13px; }.brief-sheet footer p { margin: 6px 0 0; font-size: 11px; line-height: 1.7; }
 .concept-preview {
   margin-top: 22px;
   background: var(--ink);
@@ -1076,6 +1083,7 @@ h2 {
   .rubric-grid,
   .log-grid,
   .candidate-grid,
+  .brief-preview-grid,
   .source-photo-grid {
     grid-template-columns: 1fr;
   }

@@ -1,5 +1,5 @@
 import { ArrowUpRight, Check, Clock3, ExternalLink, FileText, Lightbulb, MessageCircle, Quote, Sparkles } from "lucide-react";
-import { harness, scoreLabels, type Branch } from "../../lib/harness";
+import { harness, scoreLabels, type Branch, type PreScreenBrief } from "../../lib/harness";
 
 export default function Reports() {
   const branches: Branch[] = harness.branches;
@@ -10,6 +10,7 @@ export default function Reports() {
     return { branch, loop, total: Object.values(loop.scores).reduce((sum, score) => sum + score, 0) };
   }).sort((a, b) => b.total - a.total);
   const sources = [...new Map(active.loops.flatMap((loop) => loop.sources).map((source) => [source.url, source])).values()];
+  const briefs: PreScreenBrief[] = harness.preScreenBriefs;
 
   return <div className="page-shell report-page">
     <div className="report-top"><div>
@@ -27,6 +28,15 @@ export default function Reports() {
       <article className="paper-card"><div className="paper-icon"><Quote size={19} /></div><span className="card-label">INPUT / THIS LOOP</span><h3>{latest.question}</h3><p>{latest.input.join("　/　")}</p></article>
       <article className="paper-card accent-paper"><div className="paper-icon"><Lightbulb size={19} /></div><span className="card-label">CRITICAL REVIEW</span><h3>いま確かなことと、<br />まだ仮説のことを分ける。</h3><p>{latest.diagnosis}</p></article>
       <article className="paper-card"><div className="paper-icon"><Sparkles size={19} /></div><span className="card-label">NEXT VALIDATION</span><h3>次に確かめること</h3><p>{latest.next}</p></article>
+    </section>
+
+    <section className="brief-preview-section"><div className="section-heading"><div><span className="card-label">PRE-SCREEN ONE-PAGE PREVIEW</span><h2>二案を、提出の一枚として比べる</h2></div><FileText size={20} /></div>
+      <p className="rubric-intro">説明を読む前に、何を応援し、誰にどんな物が届くかを比較するためのプレビューです。完成案ではなく、人の確認を受けるためのドラフトです。</p>
+      <div className="brief-preview-grid">{briefs.map((brief, index) => <article key={brief.id} className={`brief-sheet ${index === 0 ? "lead" : ""}`}>
+        <header><span>{brief.role}</span><small>{brief.status}</small></header><div className="brief-title"><span>BRAND CONCEPT</span><h3>{brief.title}</h3><p>{brief.line}</p></div>
+        <dl><div><dt>問い</dt><dd>{brief.question}</dd></div><div><dt>インプット</dt><dd>{brief.input}</dd></div><div><dt>コンセプト</dt><dd>{brief.concept}</dd></div><div><dt>アウトプット</dt><dd>{brief.prototype}</dd></div></dl>
+        <footer><span>確認したいこと</span><p>{brief.validation}</p></footer>
+      </article>)}</div>
     </section>
 
     <section className="candidate-section"><div className="section-heading"><div><span className="card-label">CURRENT PORTFOLIO / ALL GENERATED DIRECTIONS</span><h2>比較に残している候補</h2></div><span className="score-badge">{candidates.length} BRANCHES</span></div>

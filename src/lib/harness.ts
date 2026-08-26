@@ -31,6 +31,19 @@ export type Branch = {
   loops: Loop[];
 };
 
+export type PreScreenBrief = {
+  id: string;
+  title: string;
+  role: string;
+  line: string;
+  question: string;
+  input: string;
+  concept: string;
+  prototype: string;
+  validation: string;
+  status: "人の確認待ち" | "公開情報を確認";
+};
+
 export const scoreLabels: { key: keyof Score; label: string; max: number }[] = [
   { key: "input", label: "INPUT", max: 30 },
   { key: "concept", label: "CONCEPT", max: 30 },
@@ -43,6 +56,32 @@ export const harness = {
   updatedAt: "2026.08.26",
   rule: "ユーザーが停止を指示するまで継続する。1枝につき3回を目安に評価し、伸びが止まったら保留して次の枝を発散する。人の直感は点数より優先して残せる。",
   modelPolicy: "通常はTerraを使用。Solへの切替は、複数枝の統合判断・審査基準の再設計・最終ストーリーの矛盾解消など、深い推論が必要な局面に限定し、理由を記録する。",
+  preScreenBriefs: [
+    {
+      id: "draft-weather",
+      title: "下書きの天気",
+      role: "主候補",
+      line: "まだ見せられない景色へ、助言ではない応援を。",
+      question: "言葉になる前の夢を、助言せず応援できるか。",
+      input: "卒業制作の中間発表前。学生は作品をまだ説明できず、仲間も何を言えばよいか迷う。",
+      concept: "他者の理解を急がず、いま見えている景色だけを返す。",
+      prototype: "制作者が“いま、見せられる景色”を紙に置き、仲間は名前も理由も書かず色を一つ置く。本人は開く・後で開く・開かないを選べる。",
+      validation: "色だけの応援は、励ましや助言より負担が少ないか。",
+      status: "人の確認待ち",
+    },
+    {
+      id: "entry-support",
+      title: "入口を応援する",
+      role: "実験候補",
+      line: "知らない場所へ入る一歩を、店を評価せずに応援する。",
+      question: "知らない場所へ入る一歩を、店を評価せずに応援できるか。",
+      input: "初めての店の前で、何が待っているか分からず入れない人がいる、という仮説。",
+      concept: "常連が店を薦めるのでなく、“初めての自分が安心した一場面”だけを次の人へ預ける。",
+      prototype: "入口の二つ折り旗を選び、開き、読み終えたら箱へ戻す。常連は同じ文型で一場面を残す。",
+      validation: "旗は初来店者の不安を一つ減らし、店主の負担を増やさないか。",
+      status: "人の確認待ち",
+    },
+  ] satisfies PreScreenBrief[],
   branches: [
     {
       id: "after-applause",
