@@ -50,6 +50,12 @@ export type ReviewQuestion = {
   whyItMatters: string;
 };
 
+export type ArchiveObservation = {
+  observation: string;
+  implication: string;
+  sources: { name: string; url: string }[];
+};
+
 export const scoreLabels: { key: keyof Score; label: string; max: number }[] = [
   { key: "input", label: "INPUT", max: 30 },
   { key: "concept", label: "CONCEPT", max: 30 },
@@ -110,6 +116,24 @@ export const harness = {
       whyItMatters: "売上ではなく、入口での行為と店主の負担を観察する設計を具体化する。",
     },
   ] satisfies ReviewQuestion[],
+  archiveObservations: [
+    {
+      observation: "公開アーカイブの2件をページ単位で確認すると、冒頭で Input と仮説を大きく切り分け、調査の量ではなく『何を問いにしたか』を一目で読ませている。",
+      implication: "本プロジェクトの一枚も、背景を詰め込みすぎず、まず『まだ、聞かない。』または『入口を応援する』という問いを大きく置き、その後に背景と物を続ける。",
+      sources: [
+        { name: "BranCo! 2023 Yukyari 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2024/09/Yukyari.pdf" },
+        { name: "BranCo! Neighbor 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2021/07/Neighbor.pdf" },
+      ],
+    },
+    {
+      observation: "2件とも、調査・仮説・ヒントを独立した画面にし、アウトプットへ進む前に『なぜこの体験が必要か』を読ませている。見た目のスタイルは異なるが、論理の段階を混ぜない。",
+      implication: "レポートと提出ドラフトでは、調査ソース、チームの仮説、紙モック、確認待ちの問いを別々に見せ、未検証の主張を完成した結論に見せない。",
+      sources: [
+        { name: "BranCo! 2023 Yukyari 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2024/09/Yukyari.pdf" },
+        { name: "BranCo! Neighbor 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2021/07/Neighbor.pdf" },
+      ],
+    },
+  ] satisfies ArchiveObservation[],
   branches: [
     {
       id: "after-applause",
@@ -705,6 +729,25 @@ export const harness = {
           modelReason: "人の確認がない状態を透明に扱い、検証質問を設計するため標準モデルを使用。",
           evidence: "人の確認待ち",
           sources: [],
+        },
+        {
+          id: "052",
+          date: "2026.08.26",
+          phase: "検証",
+          question: "過去のBranCo!公開資料から、今の二案を初見の人へ誤解なく見せるために何を学べるか。",
+          input: ["公式サイトで公開されている過去受賞作のPDFを2件、ページ構成と文字の見せ方まで確認した。目的は受賞作の表面を真似ることではなく、調査・仮説・体験をどの順番で読ませているかを知ることにある。", "本プロジェクトの二案は背景・コンセプト・紙モック・確認待ちの問いを持つが、文章を一度に読ませると、どこまでが根拠でどこからが仮説か分かりにくい。"],
+          output: "アーカイブから二つの観察を得た。第一に、どちらの資料も冒頭でInputと仮説を分け、調査量ではなく一つの大きな問いを読ませている。第二に、調査・仮説・ヒントを独立した画面にしてからアウトプットへ進み、論理の段階を混ぜていない。これを受け、今の二案は『問いを大きく置く→背景を短く示す→物を見せる→未検証の確認質問を残す』という順序で一枚にする。アーカイブ資料はレポート上でも、観察の根拠として直接開けるようにした。",
+          diagnosis: "二件の公開資料から得た観察は、提出の見せ方のヒントであって、審査に通る形式の保証ではない。今の二案には、物の魅力と人の確認がまだ足りない。次は見せ方だけを整えて強く見せるのではなく、各案の最初の10秒の使用場面を比較する。",
+          delta: "公式の審査基準だけを参照する状態から、過去公開資料の実際のページ構成を確認し、調査・仮説・体験・確認待ちを分けて見せる根拠を追加。",
+          scores: { input: 30, concept: 30, output: 25, story: 15, human: 9 },
+          next: "『まだ、聞かない。』と『入口を応援する』の最初の10秒を、誰が何に触れ、何が変わるかだけで比較する。",
+          model: "Terra",
+          modelReason: "公開資料を少数で読み、提出の見せ方へ翻訳する調査・検証のため標準モデルを使用。",
+          evidence: "公開情報を確認",
+          sources: [
+            { name: "BranCo! 2023 Yukyari 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2024/09/Yukyari.pdf", usedFor: "Inputと仮説を大きな見出しで分けるページ構成の確認" },
+            { name: "BranCo! Neighbor 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2021/07/Neighbor.pdf", usedFor: "調査・仮説・体験を別の段階として見せる構成の確認" },
+          ],
         },
       ],
     },

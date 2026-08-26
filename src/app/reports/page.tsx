@@ -1,5 +1,5 @@
 import { ArrowUpRight, Check, Clock3, ExternalLink, FileText, Lightbulb, MessageCircle, Quote, Sparkles } from "lucide-react";
-import { harness, scoreLabels, type Branch, type PreScreenBrief, type ReviewQuestion } from "../../lib/harness";
+import { harness, scoreLabels, type ArchiveObservation, type Branch, type PreScreenBrief, type ReviewQuestion } from "../../lib/harness";
 
 export default function Reports() {
   const branches: Branch[] = harness.branches;
@@ -12,6 +12,7 @@ export default function Reports() {
   const sources = [...new Map(active.loops.flatMap((loop) => loop.sources).map((source) => [source.url, source])).values()];
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
+  const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
   const maxScore = scoreLabels.reduce((sum, score) => sum + score.max, 0);
 
   return <div className="page-shell report-page">
@@ -44,6 +45,10 @@ export default function Reports() {
     <section className="review-request"><div className="section-heading"><div><span className="card-label">REVIEW REQUEST / WAITING FOR HUMAN INPUT</span><h2>次に、人へ確認したいこと</h2></div><MessageCircle size={20} /></div>
       <p>この回答はまだ取得していません。回答が来たら、誰から・いつ・何と言われたかを次のループの INPUT として記録します。</p>
       <div className="review-question-grid">{reviewQuestions.map((item, index) => <article key={item.question}><span>{String(index + 1).padStart(2, "0")} / {item.candidate}</span><h3>{item.question}</h3><p><b>回答で変えること：</b>{item.whyItMatters}</p></article>)}</div>
+    </section>
+
+    <section className="archive-reading"><div className="section-heading"><div><span className="card-label">PUBLIC ARCHIVE / RESEARCH NOTE</span><h2>過去公開資料から読んだこと</h2></div><ExternalLink size={20} /></div>
+      <div className="archive-reading-grid">{archiveObservations.map((item) => <article key={item.observation}><h3>{item.observation}</h3><p><b>今回への反映：</b>{item.implication}</p><div>{item.sources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer"><ExternalLink size={13} />{source.name}</a>)}</div></article>)}</div>
     </section>
 
     <section className="candidate-section"><div className="section-heading"><div><span className="card-label">CURRENT PORTFOLIO / ALL GENERATED DIRECTIONS</span><h2>比較に残している候補</h2></div><span className="score-badge">{candidates.length} BRANCHES</span></div>
