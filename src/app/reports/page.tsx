@@ -1,5 +1,5 @@
 import { ArrowUpRight, Check, Clock3, ExternalLink, FileText, Lightbulb, MessageCircle, Quote, Sparkles } from "lucide-react";
-import { harness, scoreLabels, type ArchiveObservation, type Branch, type PreScreenBrief, type ReviewQuestion } from "../../lib/harness";
+import { harness, scoreLabels, type ArchiveObservation, type Branch, type PreScreenBrief, type PrototypePreview, type ReviewQuestion } from "../../lib/harness";
 
 export default function Reports() {
   const branches: Branch[] = harness.branches;
@@ -13,6 +13,7 @@ export default function Reports() {
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
+  const prototypePreviews: PrototypePreview[] = harness.prototypePreviews;
   const maxScore = scoreLabels.reduce((sum, score) => sum + score.max, 0);
 
   return <div className="page-shell report-page">
@@ -40,6 +41,11 @@ export default function Reports() {
         <dl><div><dt>問い</dt><dd>{brief.question}</dd></div><div><dt>インプット</dt><dd>{brief.input}</dd></div><div><dt>コンセプト</dt><dd>{brief.concept}</dd></div><div><dt>アウトプット</dt><dd>{brief.prototype}</dd></div></dl>
         <footer><span>確認したいこと</span><p>{brief.validation}</p></footer>
       </article>)}</div>
+    </section>
+
+    <section className="prototype-preview"><div className="section-heading"><div><span className="card-label">PAPER MOCK / NOT FINAL</span><h2>最初の10秒の、物の試作</h2></div><Sparkles size={20} /></div>
+      <p>提出用の完成デザインではありません。誰が最初に何を手に取り、どう関係が始まるかを確かめるための紙モックです。</p>
+      <div className="prototype-preview-grid">{prototypePreviews.map((item) => <article key={item.id} className={item.id === "entry-flag" ? "entry-flag-mock" : "seat-tag-mock"}><div className="mock-meta"><span>{item.status}</span><h3>{item.title}</h3></div><div className="mock-object"><div className="mock-front">{item.front}</div><div className="mock-inside">{item.inside}</div></div><p>{item.interaction}</p></article>)}</div>
     </section>
 
     <section className="review-request"><div className="section-heading"><div><span className="card-label">REVIEW REQUEST / WAITING FOR HUMAN INPUT</span><h2>次に、人へ確認したいこと</h2></div><MessageCircle size={20} /></div>

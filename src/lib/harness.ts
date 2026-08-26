@@ -56,6 +56,15 @@ export type ArchiveObservation = {
   sources: { name: string; url: string }[];
 };
 
+export type PrototypePreview = {
+  id: string;
+  title: string;
+  status: string;
+  front: string;
+  inside: string;
+  interaction: string;
+};
+
 export const scoreLabels: { key: keyof Score; label: string; max: number }[] = [
   { key: "input", label: "INPUT", max: 30 },
   { key: "concept", label: "CONCEPT", max: 30 },
@@ -134,6 +143,24 @@ export const harness = {
       ],
     },
   ] satisfies ArchiveObservation[],
+  prototypePreviews: [
+    {
+      id: "seat-tag",
+      title: "まだ、聞かない。の席札",
+      status: "問いの候補 / 人の確認待ち",
+      front: "まだ、聞かない。",
+      inside: "同じ部屋 / 同じ机 / 招かない",
+      interaction: "制作者だけが距離を選び、一人へ渡す。相手は理由を書かずに断れる。",
+    },
+    {
+      id: "entry-flag",
+      title: "入口を応援する旗",
+      status: "体験の候補 / 人の確認待ち",
+      front: "初めての私へ",
+      inside: "初めての私が、ここで安心したのは＿＿＿。",
+      interaction: "初来店者が入口で一枚選び、開き、読み終えたら箱へ戻す。",
+    },
+  ] satisfies PrototypePreview[],
   branches: [
     {
       id: "after-applause",
@@ -747,6 +774,25 @@ export const harness = {
           sources: [
             { name: "BranCo! 2023 Yukyari 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2024/09/Yukyari.pdf", usedFor: "Inputと仮説を大きな見出しで分けるページ構成の確認" },
             { name: "BranCo! Neighbor 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2021/07/Neighbor.pdf", usedFor: "調査・仮説・体験を別の段階として見せる構成の確認" },
+          ],
+        },
+        {
+          id: "053",
+          date: "2026.08.26",
+          phase: "評価",
+          question: "二案の最初の10秒を比べた時、誰が何に触れ、応援が始まったと初見の人に伝わるか。",
+          input: ["公開アーカイブの観察から、提出では調査の量より、最初に何が起きる体験かを一つの大きな問いとして見せる必要がある。", "主候補『まだ、聞かない。』は、未完成を急いで説明させないという言葉の核を持つが、同席という行為が初見で応援に見えるかは未確認である。", "実験候補『入口を応援する』は、初来店者が旗を選び、開き、店へ入るという物の流れがあるが、旗が販促やレビューに見えないかは未確認である。"],
+          output: "Aの最初の10秒：中間発表の前、制作者が自分の机に小さな席札を置き、同席してほしい一人へ渡す。相手は札を受け取り、まだ作品を見ずに隣の席へ座る。ここで応援は『質問しないで同じ時間にいる』として始まる。Bの最初の10秒：初めての人が店の入口で、色だけが見える二つ折りの旗を一枚選ぶ。開くと『初めての私が、ここで安心したのは＿＿＿。』という一場面があり、その人は評価も案内も受けずに店へ入る。ここで応援は『知らない誰かの入口を借りる』として始まる。比較すると、Aは応援の定義の新しさが強く、Bは物と行為の分かりやすさが強い。",
+          diagnosis: "Bは最初の10秒だけで物の役割が伝わる。Aは相手との関係が既にあることを前提にし、札の意味を説明しないと『共同作業の誘い』に見える。プレ審査のアウトプットとしてはBが先行するが、Aの『まだ聞かない』という問いは安易に捨てない。二案は勝敗でなく、Bを体験の主候補、Aをコンセプトの主候補として並走させる。",
+          delta: "同じ五項目で比較する段階から、最初の10秒に限定して、物の即時性と応援の定義を分けて評価した。",
+          scores: { input: 30, concept: 30, output: 25, story: 15, human: 9 },
+          next: "Bは旗一枚の紙モックを視覚的に試作し、Aは席札だけで応援の意味が伝わるかを先生確認の問いとして保留する。",
+          model: "Terra",
+          modelReason: "二案の使用場面を同じ時間軸で比較する評価のため標準モデルを使用。",
+          evidence: "人の確認待ち",
+          sources: [
+            { name: "BranCo! 2023 Yukyari 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2024/09/Yukyari.pdf", usedFor: "最初の問いを大きく見せ、体験へつなぐ構成の観察" },
+            { name: "BranCo! Neighbor 公開資料", url: "https://branddesigncontest.com/wp/wp-content/uploads/2021/07/Neighbor.pdf", usedFor: "調査と体験の段階を分ける構成の観察" },
           ],
         },
       ],
