@@ -1,5 +1,5 @@
 import { ArrowUpRight, Check, Clock3, ExternalLink, FileText, Lightbulb, MessageCircle, Quote, Sparkles } from "lucide-react";
-import { harness, scoreLabels, type Branch, type PreScreenBrief } from "../../lib/harness";
+import { harness, scoreLabels, type Branch, type PreScreenBrief, type ReviewQuestion } from "../../lib/harness";
 
 export default function Reports() {
   const branches: Branch[] = harness.branches;
@@ -11,6 +11,7 @@ export default function Reports() {
   }).sort((a, b) => b.total - a.total);
   const sources = [...new Map(active.loops.flatMap((loop) => loop.sources).map((source) => [source.url, source])).values()];
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
+  const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const maxScore = scoreLabels.reduce((sum, score) => sum + score.max, 0);
 
   return <div className="page-shell report-page">
@@ -38,6 +39,11 @@ export default function Reports() {
         <dl><div><dt>問い</dt><dd>{brief.question}</dd></div><div><dt>インプット</dt><dd>{brief.input}</dd></div><div><dt>コンセプト</dt><dd>{brief.concept}</dd></div><div><dt>アウトプット</dt><dd>{brief.prototype}</dd></div></dl>
         <footer><span>確認したいこと</span><p>{brief.validation}</p></footer>
       </article>)}</div>
+    </section>
+
+    <section className="review-request"><div className="section-heading"><div><span className="card-label">REVIEW REQUEST / WAITING FOR HUMAN INPUT</span><h2>次に、人へ確認したいこと</h2></div><MessageCircle size={20} /></div>
+      <p>この回答はまだ取得していません。回答が来たら、誰から・いつ・何と言われたかを次のループの INPUT として記録します。</p>
+      <div className="review-question-grid">{reviewQuestions.map((item, index) => <article key={item.question}><span>{String(index + 1).padStart(2, "0")} / {item.candidate}</span><h3>{item.question}</h3><p><b>回答で変えること：</b>{item.whyItMatters}</p></article>)}</div>
     </section>
 
     <section className="candidate-section"><div className="section-heading"><div><span className="card-label">CURRENT PORTFOLIO / ALL GENERATED DIRECTIONS</span><h2>比較に残している候補</h2></div><span className="score-badge">{candidates.length} BRANCHES</span></div>
