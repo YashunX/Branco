@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { ArrowRight, GitBranch, RotateCw, ShieldCheck } from "lucide-react";
 import { type Branch, scoreLabels } from "../../lib/harness";
 
-type Harness = { updatedAt: string; rule: string; branches: Branch[] };
+type Harness = { updatedAt: string; rule: string; modelPolicy: string; branches: Branch[] };
 
 export default function HarnessBoard({ harness }: { harness: Harness }) {
   const [branchId, setBranchId] = useState(harness.branches[0].id);
@@ -19,7 +19,7 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
           <h1>案を出すだけでなく、<em>良くしていく。</em></h1>
           <p>この画面は生成結果の展示ではなく、AIが更新する改善状態の共有面です。最終更新：{harness.updatedAt}</p>
         </div>
-        <div className="harness-rule"><ShieldCheck size={18} /><span>{harness.rule}</span></div>
+        <div className="harness-rule"><ShieldCheck size={18} /><span>{harness.rule}<br /><br />{harness.modelPolicy}</span></div>
       </div>
 
       <section className="branch-section">
@@ -36,7 +36,7 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
 
       {branch.loops.length ? <section className="loop-timeline">
         {branch.loops.map((loop, index) => <article className="loop-card" key={loop.id}>
-          <div className="loop-index"><b>#{loop.id}</b><span>{loop.phase}</span>{index < branch.loops.length - 1 && <i><ArrowRight size={16} /></i>}</div>
+          <div className="loop-index"><b>#{loop.id}</b><span>{loop.phase}</span><small>{loop.model ?? "Terra"}</small>{index < branch.loops.length - 1 && <i><ArrowRight size={16} /></i>}</div>
           <div className="loop-main"><span className="card-label">QUESTION / {loop.date}</span><h3>{loop.question}</h3><div className="loop-detail"><div><b>INPUT</b><p>{loop.input.join(" / ")}</p></div><div><b>OUTPUT</b><p>{loop.output}</p></div><div><b>DIAGNOSIS</b><p>{loop.diagnosis}</p></div></div></div>
           <div className="score-stack">{scoreLabels.map(({ key, label, max }) => <div key={key}><span>{label}</span><b>{loop.scores[key]}/{max}</b></div>)}</div>
           <footer><b>前回からの差分</b><p>{loop.delta}</p><b>次の一手</b><p>{loop.next}</p></footer>

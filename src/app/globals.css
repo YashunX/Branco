@@ -1034,6 +1034,7 @@ h2 {
 .loop-timeline { display: grid; gap: 16px; }
 .loop-card { display: grid; grid-template-columns: 88px minmax(0, 1fr) 120px; border: 1px solid var(--line); background: var(--cream); }
 .loop-index { background: #e4ece6; padding: 20px 14px; display: flex; flex-direction: column; gap: 6px; color: var(--green); }.loop-index b { font-size: 23px; }.loop-index span { font-size: 10px; letter-spacing: .1em; }.loop-index i { display: none; }
+.loop-index small { font-size: 9px; color: var(--muted); letter-spacing: .08em; }
 .loop-main { padding: 20px; }.loop-main h3 { font-family: var(--font-serif), serif; font-size: 20px; font-weight: 500; margin: 10px 0 18px; line-height: 1.55; }
 .loop-detail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }.loop-detail b, .loop-card footer b { color: var(--green); font-size: 9px; letter-spacing: .1em; }.loop-detail p, .loop-card footer p { font-size: 11px; color: var(--muted); line-height: 1.7; margin: 6px 0 0; }
 .score-stack { border-left: 1px solid var(--line); padding: 17px 13px; display: grid; align-content: start; gap: 8px; }.score-stack div { display: flex; justify-content: space-between; gap: 5px; font-size: 10px; }.score-stack span { color: var(--muted); }.score-stack b { font-weight: 600; }
