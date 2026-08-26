@@ -36,10 +36,10 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
 
       {branch.loops.length ? <section className="loop-timeline">
         {branch.loops.map((loop, index) => <article className="loop-card" key={loop.id}>
-          <div className="loop-index"><b>#{loop.id}</b><span>{loop.phase}</span><small>{loop.model ?? "Terra"}</small>{index < branch.loops.length - 1 && <i><ArrowRight size={16} /></i>}</div>
+          <div className="loop-index"><b>#{loop.id}</b><span>{loop.phase}</span><small>{loop.model ?? "Terra"}</small><small className="evidence-status">{loop.evidence ?? "仮説"}</small>{index < branch.loops.length - 1 && <i><ArrowRight size={16} /></i>}</div>
           <div className="loop-main"><span className="card-label">QUESTION / {loop.date}</span><h3>{loop.question}</h3><div className="loop-detail"><div><b>INPUT</b><p>{loop.input.join(" / ")}</p></div><div><b>OUTPUT</b><p>{loop.output}</p></div><div><b>DIAGNOSIS</b><p>{loop.diagnosis}</p></div></div></div>
           <div className="score-stack">{scoreLabels.map(({ key, label, max }) => <div key={key}><span>{label}</span><b>{loop.scores[key]}/{max}</b></div>)}</div>
-          <footer><b>前回からの差分</b><p>{loop.delta}</p><b>次の一手</b><p>{loop.next}</p></footer>
+          <footer><b>前回からの差分</b><p>{loop.delta}</p><b>次の一手</b><p>{loop.next}</p>{loop.sources.length > 0 && <><b>参照した情報</b><p className="loop-sources">{loop.sources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer">{source.name} <span>— {source.usedFor}</span></a>)}</p></>}</footer>
         </article>)}
       </section> : <section className="empty-branch"><h2>この枝はまだ走らせていません。</h2><p>次のAI実行で、問い・入力・出力・診断・次の一手を追加します。</p></section>}
 
