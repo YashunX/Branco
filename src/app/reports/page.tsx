@@ -13,19 +13,19 @@ export default function Reports() {
     <header className="story-hero">
       <div className="eyebrow"><span /> BRANCO! PRE-SCREEN / STORY DRAFT / 2026.08.26</div>
       <h1>初めての声援に、<em>正解をつくらない。</em></h1>
-      <p>これは過去の候補を引き継がず、白紙から始めた一本目のストーリーである。私たちは、応援する対象ではなく、応援したいのに輪へ入れない人の最初の瞬間から考え始めた。</p>
-      <div className="story-hero-note"><b>いまの仮説</b><span>初めての人が、作法を覚える前に自分の参加の距離を選べたら、応援はもっと早く始まるかもしれない。</span></div>
+      <p>これは過去の候補を引き継がず、白紙から始めた二本のストーリーである。一つは、応援したいのに輪へ入れない人の最初の瞬間。もう一つは、応援される木と、その近くで日常を担う人の季節の瞬間から考えた。</p>
+      <div className="story-hero-note"><b>いまの仮説</b><span>応援は、声を大きくする前に、誰かや何かとの関係を少しだけ結び直すことから始まるかもしれない。</span></div>
     </header>
 
     <section className="story-premise">
       <span className="card-label">WHY WE REDEFINED SUPPORT</span>
-      <h2>応援は、正しく参加することではなく、<br />自分のまま参加できることからも始まる。</h2>
-      <p>コールを知らない。常連の輪が見える。自分だけ浮きたくない。そんな最初の緊張を、応援する人の能力不足として扱わない。今日の距離を選べること自体を、応援の入口にできないかと考えた。</p>
+      <h2>応援は、誰かを動かす前に、<br />関係の偏りをほどくことからも始まる。</h2>
+      <p>作法を知る人と知らない人。木陰を受け取る人と落葉を引き受ける人。私たちは、応援の前にすでにある小さな偏りを、個人の気遣いや善意だけで埋めない入口を探している。</p>
     </section>
 
     <section className="story-candidate-section">
-      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESIS / FIRST DRAFT</span><h2>一つ目の応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした一案目。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、完成案として扱わない。</p>
+      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>二つの応援の物語</h2></div><Sparkles size={20} /></div>
+      <p className="story-section-intro">公開情報を出発点にした二案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どちらも完成案として扱わない。</p>
       <div className="story-candidates">
         {briefs.map((brief, index) => {
           const prototype = prototypes[index];
@@ -46,7 +46,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #003</strong><p>旧候補・旧モック・旧採点を除去。新規調査から発散し、既存ガイドとの差を辛口で検証して、最初の物を作り直した。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #004</strong><p>最初の枝は発散・辛口評価・改善を終えて保留。人以外の対象へ視点を移し、二本目をゼロから発散した。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
