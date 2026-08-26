@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 白紙化後のハーネスループ
-          #010：「未完の便り」を、応援が叶わず終わる時の一度きりの返事として発散しました。
+          #011：「終わりの約束」を、応援を始める前から終わり方を共有する形へ改善しました。
         </div>
       </section>
       <section className="signal-grid">
