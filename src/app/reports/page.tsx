@@ -1,73 +1,59 @@
-import { ArrowUpRight, Check, Clock3, ExternalLink, FileText, Lightbulb, MessageCircle, Quote, Sparkles } from "lucide-react";
-import { harness, scoreLabels, type ArchiveObservation, type Branch, type PreScreenBrief, type PrototypePreview, type ReviewQuestion } from "../../lib/harness";
+import { ArrowUpRight, Clock3, ExternalLink, FileText, MessageCircle, Sparkles } from "lucide-react";
+import { harness, type ArchiveObservation, type PreScreenBrief, type PrototypePreview, type ReviewQuestion } from "../../lib/harness";
+
+const storySteps = ["背景", "そこで起きること", "私たちの応援の定義"];
 
 export default function Reports() {
-  const branches: Branch[] = harness.branches;
-  const active = branches.find((branch) => branch.status === "active") ?? branches[0];
-  const latest = active.loops.at(-1)!;
-  const candidates = branches.filter((branch) => branch.loops.length > 0).map((branch) => {
-    const loop = branch.loops.at(-1)!;
-    return { branch, loop, total: Object.values(loop.scores).reduce((sum, score) => sum + score, 0) };
-  }).sort((a, b) => b.total - a.total);
-  const sources = [...new Map(active.loops.flatMap((loop) => loop.sources).map((source) => [source.url, source])).values()];
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
+  const prototypes: PrototypePreview[] = harness.prototypePreviews;
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
-  const prototypePreviews: PrototypePreview[] = harness.prototypePreviews;
-  const maxScore = scoreLabels.reduce((sum, score) => sum + score.max, 0);
 
-  return <div className="page-shell report-page">
-    <div className="report-top"><div>
-      <div className="eyebrow"><span /> LATEST REPORT / LOOP #{latest.id} / {latest.date}</div>
-      <h1>{active.title}<br /><em>{active.premise}</em></h1>
-      <p>ハーネスの最新ループから自動で組み立てる共有用レポートです。完成を装わず、生成・調査・人の確認状況を同じ画面に残します。</p>
-    </div><a href="/harness" className="ghost-button"><FileText size={17} /> 全ループを見る</a></div>
+  return <div className="page-shell report-page story-report">
+    <header className="story-hero">
+      <div className="eyebrow"><span /> BRANCO! PRE-SCREEN / STORY DRAFT / 2026.08.26</div>
+      <h1>応援を、<em>前へ進ませる言葉</em><br />だけにしない。</h1>
+      <p>私たちは、応援を「頑張れと言うこと」から考え始めなかった。誰かが自分のペースで次の一歩を踏める状態を、どうつくれるかから考えた。</p>
+      <div className="story-hero-note"><b>いまの結論</b><span>プレ審査では、異なる二つの仮説を残す。どちらも完成案ではなく、人の確認を受けるためのドラフトである。</span></div>
+    </header>
 
-    <section className="report-hero-card"><div className="report-number">{latest.id}</div><div>
-      <span className="card-label">CURRENT CONCEPT / {latest.evidence ?? "仮説"}</span>
-      <h2>{active.title}<br />{active.premise}</h2><p>{latest.output}</p>
-    </div><div className="report-meta"><span>THEME</span><strong>応援</strong><span>STATUS</span><strong>{latest.evidence ?? "仮説"}</strong><span>MODEL</span><strong>{latest.model ?? "Terra"}</strong></div></section>
-
-    <section className="report-grid">
-      <article className="paper-card"><div className="paper-icon"><Quote size={19} /></div><span className="card-label">INPUT / THIS LOOP</span><h3>{latest.question}</h3><p>{latest.input.join("　/　")}</p></article>
-      <article className="paper-card accent-paper"><div className="paper-icon"><Lightbulb size={19} /></div><span className="card-label">CRITICAL REVIEW</span><h3>いま確かなことと、<br />まだ仮説のことを分ける。</h3><p>{latest.diagnosis}</p></article>
-      <article className="paper-card"><div className="paper-icon"><Sparkles size={19} /></div><span className="card-label">NEXT VALIDATION</span><h3>次に確かめること</h3><p>{latest.next}</p></article>
+    <section className="story-premise">
+      <span className="card-label">WHY WE REDEFINED SUPPORT</span>
+      <h2>応援は、相手を動かすことではなく、<br />相手が動ける余白を守ることでもある。</h2>
+      <p>言葉を急がない。評価を足さない。誰かの経験を押しつけない。私たちはこの三つを出発点に、応援が始まる直前の二つの場面を選んだ。</p>
     </section>
 
-    <section className="brief-preview-section"><div className="section-heading"><div><span className="card-label">PRE-SCREEN ONE-PAGE PREVIEW</span><h2>二案を、提出の一枚として比べる</h2></div><FileText size={20} /></div>
-      <p className="rubric-intro">説明を読む前に、何を応援し、誰にどんな物が届くかを比較するためのプレビューです。完成案ではなく、人の確認を受けるためのドラフトです。</p>
-      <div className="brief-preview-grid">{briefs.map((brief, index) => <article key={brief.id} className={`brief-sheet ${index === 0 ? "lead" : ""}`}>
-        <header><span>{brief.role}</span><small>{brief.status}</small></header><div className="brief-title"><span>BRAND CONCEPT</span><h3>{brief.title}</h3><p>{brief.line}</p></div>
-        <dl><div><dt>問い</dt><dd>{brief.question}</dd></div><div><dt>インプット</dt><dd>{brief.input}</dd></div><div><dt>コンセプト</dt><dd>{brief.concept}</dd></div><div><dt>アウトプット</dt><dd>{brief.prototype}</dd></div></dl>
-        <footer><span>確認したいこと</span><p>{brief.validation}</p></footer>
-      </article>)}</div>
+    <section className="story-candidate-section">
+      <div className="section-heading"><div><span className="card-label">TWO HYPOTHESES / NOT ONE CONCLUSION</span><h2>二つの応援の、二つの物語</h2></div><Sparkles size={20} /></div>
+      <p className="story-section-intro">同じテーマから生まれた二案だが、解きたい緊張は異なる。読者が「どちらが正しいか」ではなく、「どちらの問いに手応えがあるか」を判断できるよう、同じ順番で記す。</p>
+      <div className="story-candidates">
+        {briefs.map((brief, index) => {
+          const prototype = prototypes[index];
+          const steps = [brief.background, brief.tension, brief.redefinition];
+          return <article className={`story-candidate ${index === 0 ? "primary-story" : "secondary-story"}`} key={brief.id}>
+            <header><span>{brief.role}</span><small>{brief.status}</small></header>
+            <div className="story-title"><h3>{brief.title}</h3><p>{brief.line}</p></div>
+            <div className="story-flow">{steps.map((step, stepIndex) => <div key={storySteps[stepIndex]}><span>0{stepIndex + 1}</span><section><b>{storySteps[stepIndex]}</b><p>{step}</p></section></div>)}</div>
+            <div className="story-scene"><span>最初の10秒</span><p>{prototype.interaction}</p><div className="story-object"><div>{prototype.front}</div><div>{prototype.inside}</div></div></div>
+            <footer><b>まだ答えられていないこと</b><p>{brief.validation}</p></footer>
+          </article>;
+        })}
+      </div>
     </section>
 
-    <section className="prototype-preview"><div className="section-heading"><div><span className="card-label">PAPER MOCK / NOT FINAL</span><h2>最初の10秒の、物の試作</h2></div><Sparkles size={20} /></div>
-      <p>提出用の完成デザインではありません。誰が最初に何を手に取り、どう関係が始まるかを確かめるための紙モックです。</p>
-      <div className="prototype-preview-grid">{prototypePreviews.map((item) => <article key={item.id} className={item.id === "entry-flag" ? "entry-flag-mock" : "seat-tag-mock"}><div className="mock-meta"><span>{item.status}</span><h3>{item.title}</h3></div><div className="mock-object"><div className="mock-front">{item.front}</div><div className="mock-inside">{item.inside}</div></div><p>{item.interaction}</p></article>)}</div>
+    <section className="story-review"><div className="section-heading"><div><span className="card-label">WHAT WE NEED PEOPLE TO TELL US</span><h2>次に、人の言葉で確かめること</h2></div><MessageCircle size={20} /></div>
+      <p>ここにあるのは、まだ私たちの仮説である。先生やメンバーからの回答を、点数を上げる材料ではなく、次の設計を変える材料として受け取る。</p>
+      <div className="story-review-grid">{reviewQuestions.map((item, index) => <article key={item.question}><span>{String(index + 1).padStart(2, "0")} / {item.candidate}</span><h3>{item.question}</h3><p><b>回答で変えること：</b>{item.whyItMatters}</p></article>)}</div>
     </section>
 
-    <section className="review-request"><div className="section-heading"><div><span className="card-label">REVIEW REQUEST / WAITING FOR HUMAN INPUT</span><h2>次に、人へ確認したいこと</h2></div><MessageCircle size={20} /></div>
-      <p>この回答はまだ取得していません。回答が来たら、誰から・いつ・何と言われたかを次のループの INPUT として記録します。</p>
-      <div className="review-question-grid">{reviewQuestions.map((item, index) => <article key={item.question}><span>{String(index + 1).padStart(2, "0")} / {item.candidate}</span><h3>{item.question}</h3><p><b>回答で変えること：</b>{item.whyItMatters}</p></article>)}</div>
+    <section className="story-trace"><div className="section-heading"><div><span className="card-label">TRACE / FOR MEMBERS WHO READ LATER</span><h2>このレポートがどこから来たか</h2></div><Clock3 size={20} /></div>
+      <div className="story-trace-grid"><article><span>生成・更新</span><strong>2026.08.26<br />Loop #054まで</strong><p>ゼロベースの発散、辛口レビュー、紙モックの比較を継続中。</p></article><article><span>人のフィードバック</span><strong>まだ未取得</strong><p>存在しない意見を補わず、上の質問を次の入力として待つ。</p></article><article><span>参照した公開情報</span><strong>公式要項・FAQ<br />過去公開資料</strong><p>テーマ・評価軸・見せ方の検討材料を、下のリンクで確認できる。</p></article></div>
     </section>
 
-    <section className="archive-reading"><div className="section-heading"><div><span className="card-label">PUBLIC ARCHIVE / RESEARCH NOTE</span><h2>過去公開資料から読んだこと</h2></div><ExternalLink size={20} /></div>
-      <div className="archive-reading-grid">{archiveObservations.map((item) => <article key={item.observation}><h3>{item.observation}</h3><p><b>今回への反映：</b>{item.implication}</p><div>{item.sources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer"><ExternalLink size={13} />{source.name}</a>)}</div></article>)}</div>
+    <section className="story-sources"><div className="section-heading"><div><span className="card-label">SOURCES / WHAT WE ACTUALLY READ</span><h2>調査の根拠</h2></div><ExternalLink size={20} /></div>
+      <div className="story-source-list"><a href="https://branddesigncontest.com/outline/" target="_blank" rel="noreferrer"><span><b>BranCo! 第15回 開催概要・応募要項</b><small>テーマ「応援」と、応援の始まり・終わりという問い</small></span><ArrowUpRight size={17} /></a><a href="https://branddesigncontest.com/faq/" target="_blank" rel="noreferrer"><span><b>BranCo! FAQ</b><small>インプット・コンセプト・アウトプット・プレゼン・一貫性という評価軸</small></span><ArrowUpRight size={17} /></a>{archiveObservations.flatMap((item) => item.sources).filter((source, index, sources) => sources.findIndex((other) => other.url === source.url) === index).map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer"><span><b>{source.name}</b><small>過去公開資料のページ構成を確認した資料</small></span><ArrowUpRight size={17} /></a>)}</div>
     </section>
 
-    <section className="candidate-section"><div className="section-heading"><div><span className="card-label">CURRENT PORTFOLIO / ALL GENERATED DIRECTIONS</span><h2>比較に残している候補</h2></div><span className="score-badge">{candidates.length} BRANCHES</span></div>
-      <p className="rubric-intro">点数は比較の補助です。人が残したいと思う案は、低得点でもワイルドカードとして保持します。各案の詳細な生成結果はハーネスで追えます。</p>
-      <div className="candidate-grid">{candidates.map(({ branch, loop, total }) => <article key={branch.id} className={branch.id === active.id ? "candidate-card selected" : "candidate-card"}><div className="candidate-card-top"><span>{branch.status}</span><b>{total} / {maxScore}</b></div><h3>{branch.title}</h3><p className="candidate-line">{branch.premise}</p><p>{loop.diagnosis}</p><small>Loop #{loop.id} / {loop.evidence ?? "仮説"}</small></article>)}</div>
-    </section>
-
-    <section id="trace" className="report-log"><div className="section-heading"><div><span className="card-label">RUN LOG / TRACEABILITY</span><h2>この生成の記録</h2></div><Clock3 size={20} /></div>
-      <div className="log-grid"><article><span>GENERATED</span><strong>{latest.date}<br />Loop #{latest.id}</strong><p>{latest.phase}。{latest.model ?? "Terra"} を使用：{latest.modelReason ?? "理由未記録"}</p></article><article><span>INPUTS</span><strong>{latest.input.length} 件の入力<br />{sources.length} 件の参照情報</strong><p>出力だけでなく、前ループの診断と公開情報を入力として残しています。</p></article><article><span>FEEDBACK</span><strong>{latest.evidence ?? "仮説"}</strong><p>現時点では直接の人のフィードバックは未記録です。取得後は次のループの入力として追記します。</p></article></div>
-      <div className="feedback-strip"><MessageCircle size={18} /><p><b>今回の辛口レビュー：</b>{latest.diagnosis}</p></div>
-    </section>
-
-    <section className="decision-card"><div><span className="card-label">SCORING / NOT THE ANSWER</span><h2>今回の採点</h2></div><ul>{scoreLabels.map(({ key, label, max }) => <li key={key}><Check size={17} />{label}：{latest.scores[key]} / {max}</li>)}</ul></section>
-    <section className="sources-section compact-sources"><div><span className="card-label">SOURCES / CHECKED {latest.date}</span><h2>この案が参照した情報</h2></div>{sources.length ? sources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer"><span><ExternalLink size={17} /> {source.name}<br /><small>{source.usedFor}</small></span><ArrowUpRight size={17} /></a>) : <p>このループでは新しい公開情報を使わず、前回の診断を検証入力にしています。</p>}</section>
+    <a href="/harness" className="story-harness-link"><FileText size={17} /> 生成・評価・分岐の全記録を見る</a>
   </div>;
 }
