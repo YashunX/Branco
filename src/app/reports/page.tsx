@@ -13,24 +13,24 @@ export default function Reports() {
     <header className="story-hero">
       <div className="eyebrow"><span /> BRANCO! PRE-SCREEN / STORY DRAFT / 2026.08.26</div>
       <h1>初めての声援に、<em>正解をつくらない。</em></h1>
-      <p>これは過去の候補を引き継がず、白紙から始めた二本のストーリーである。一つは、応援したいのに輪へ入れない人の最初の瞬間。もう一つは、応援される木と、その近くで日常を担う人の季節の瞬間から考えた。</p>
+      <p>これは過去の候補を引き継がず、白紙から始めた三本のストーリーである。応援したいのに輪へ入れない人、応援される木とその近くで日常を担う人、そして頼りたいのに頼みを言葉にできない人。それぞれの最初の瞬間から考えた。</p>
       <div className="story-hero-note"><b>いまの仮説</b><span>応援は、声を大きくする前に、誰かや何かとの関係を少しだけ結び直すことから始まるかもしれない。</span></div>
     </header>
 
     <section className="story-premise">
       <span className="card-label">WHY WE REDEFINED SUPPORT</span>
       <h2>応援は、誰かを動かす前に、<br />関係の偏りをほどくことからも始まる。</h2>
-      <p>作法を知る人と知らない人。木陰を受け取る人と落葉を引き受ける人。私たちは、応援の前にすでにある小さな偏りを、個人の気遣いや善意だけで埋めない入口を探している。</p>
+      <p>作法を知る人と知らない人。木陰を受け取る人と落葉を引き受ける人。頼ってよいと言われても頼みを作れない人。私たちは、応援の前にすでにある小さな偏りを、個人の気遣いや善意だけで埋めない入口を探している。</p>
     </section>
 
     <section className="story-candidate-section">
-      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>二つの応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした二案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どちらも完成案として扱わない。</p>
+      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>三つの応援の物語</h2></div><Sparkles size={20} /></div>
+      <p className="story-section-intro">公開情報を出発点にした三案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。</p>
       <div className="story-candidates">
         {briefs.map((brief, index) => {
           const prototype = prototypes[index];
           const steps = [brief.background, brief.tension, brief.redefinition];
-          return <article className={`story-candidate ${index === 0 ? "primary-story" : "secondary-story"}`} key={brief.id}>
+          return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : "tertiary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{brief.status}</small></header>
             <div className="story-title"><h3>{brief.title}</h3><p>{brief.line}</p></div>
             <div className="story-flow">{steps.map((step, stepIndex) => <div key={storySteps[stepIndex]}><span>0{stepIndex + 1}</span><section><b>{storySteps[stepIndex]}</b><p>{step}</p></section></div>)}</div>
@@ -46,7 +46,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #006</strong><p>二本目を発散した後、通行者に清掃責任を渡す紙のしおりを不採用にした。許可済みの木・管理者・中間支援者の役割を先に置き、季節で反転する標識へ改善した。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #007</strong><p>既存二案の答えを流用せず、頼るための説明まで一人で抱え込む瞬間を新しく発散した。専門的ケアを代替しない、一つだけの小さな依頼カードとして記録している。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>

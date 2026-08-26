@@ -60,7 +60,7 @@ export default function RootLayout({
               <p>
                 Harness Loop
                 <br />
-                #006 · Active
+                #007 · Active
               </p>
             </div>
           </aside>

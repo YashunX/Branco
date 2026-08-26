@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 白紙化後のハーネスループ
-          #006：「木陰を返す」を、管理責任を参加者へ渡さない季節の10分枠として再設計しました。
+          #007：「ひとつ、たのむ」を、頼るための説明を一人で抱えない依頼カードとして発散しました。
         </div>
       </section>
       <section className="signal-grid">
@@ -76,7 +76,7 @@ export default function Home() {
             <i /> RESEARCH SYNTHESIZED
           </div>
           <p>
-            旧生成物は除去済み。ゼロベースの2案を記録し、片方を辛口評価から改善中です。
+            旧生成物は除去済み。ゼロベースの3案を記録し、各案を辛口評価から改善します。
           </p>
           <Link href="/reports" className="text-link">
             生成結果をプレビュー <ArrowUpRight size={15} />
