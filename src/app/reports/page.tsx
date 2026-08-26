@@ -14,18 +14,18 @@ export default function Reports() {
       <div className="eyebrow"><span /> BRANCO! PRE-SCREEN / STORY DRAFT / 2026.08.26</div>
       <h1>応援を、<em>前へ進ませる言葉</em><br />だけにしない。</h1>
       <p>私たちは、応援を「頑張れと言うこと」から考え始めなかった。誰かが自分のペースで次の一歩を踏める状態を、どうつくれるかから考えた。</p>
-      <div className="story-hero-note"><b>いまの結論</b><span>プレ審査では、異なる二つの仮説を残す。どちらも完成案ではなく、人の確認を受けるためのドラフトである。</span></div>
+      <div className="story-hero-note"><b>いまの結論</b><span>プレ審査では、異なる三つの仮説を残す。どれも完成案ではなく、人の確認を受けるためのドラフトである。</span></div>
     </header>
 
     <section className="story-premise">
       <span className="card-label">WHY WE REDEFINED SUPPORT</span>
       <h2>応援は、相手を動かすことではなく、<br />相手が動ける余白を守ることでもある。</h2>
-      <p>言葉を急がない。評価を足さない。誰かの経験を押しつけない。私たちはこの三つを出発点に、応援が始まる直前の二つの場面を選んだ。</p>
+      <p>言葉を急がない。評価を足さない。誰かの経験を押しつけない。頼む勇気だけを一人に負わせない。私たちはこの四つを出発点に、応援が始まる直前の三つの場面を選んだ。</p>
     </section>
 
     <section className="story-candidate-section">
-      <div className="section-heading"><div><span className="card-label">TWO HYPOTHESES / NOT ONE CONCLUSION</span><h2>二つの応援の、二つの物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">同じテーマから生まれた二案だが、解きたい緊張は異なる。読者が「どちらが正しいか」ではなく、「どちらの問いに手応えがあるか」を判断できるよう、同じ順番で記す。</p>
+      <div className="section-heading"><div><span className="card-label">THREE HYPOTHESES / NOT ONE CONCLUSION</span><h2>三つの応援の、三つの物語</h2></div><Sparkles size={20} /></div>
+      <p className="story-section-intro">同じテーマから生まれた三案だが、解きたい緊張は異なる。読者が「どれが正しいか」ではなく、「どの問いに手応えがあるか」を判断できるよう、同じ順番で記す。</p>
       <div className="story-candidates">
         {briefs.map((brief, index) => {
           const prototype = prototypes[index];
@@ -46,7 +46,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />Loop #054まで</strong><p>ゼロベースの発散、辛口レビュー、紙モックの比較を経て、この二案をストーリー化した。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />Loop #055まで</strong><p>ゼロベースの発散、辛口レビュー、紙モックの比較を経て、三案をストーリー化した。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
