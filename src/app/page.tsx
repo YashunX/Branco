@@ -40,8 +40,8 @@ export default function Home() {
           </Link>
         </div>
         <div className="hero-note">
-          <Sparkles size={16} /> 今夜のハーネスループ
-          #008：「途中のしおり」を、努力した時間を返す応援として再設計しました。
+          <Sparkles size={16} /> 白紙化後のハーネスループ
+          #001：「はじめての合図」を、初めての人が自分の距離で応援を始める仮説として起案しました。
         </div>
       </section>
       <section className="signal-grid">
@@ -76,7 +76,7 @@ export default function Home() {
             <i /> RESEARCH SYNTHESIZED
           </div>
           <p>
-            公式要件と過去のデトックス案を統合。次の発散テーマを3本、用意しました。
+            旧生成物は除去済み。公式要件と新規調査から、ゼロベースの仮説を1本起案中です。
           </p>
           <Link href="/reports" className="text-link">
             生成結果をプレビュー <ArrowUpRight size={15} />
@@ -126,7 +126,7 @@ export default function Home() {
               <b>02</b>
               <div>
                 <strong>REFRAME</strong>
-                <span>デトックス案を「応援」の素材として保存・再解釈</span>
+                <span>過去の知識は別保管し、結論を持ち込まず問いを立て直す</span>
               </div>
               <CheckCircle2 size={17} />
             </li>
