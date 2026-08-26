@@ -5,6 +5,8 @@ const storySteps = ["背景", "そこで起きること", "私たちの応援の
 
 export default function Reports() {
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
+  const activeBriefs = briefs.filter((brief) => brief.status !== "保留 / 再発散待ち");
+  const parkedBriefs = briefs.filter((brief) => brief.status === "保留 / 再発散待ち");
   const prototypes: PrototypePreview[] = harness.prototypePreviews;
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
@@ -27,7 +29,8 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>四つの応援の物語</h2></div><Sparkles size={20} /></div>
       <p className="story-section-intro">公開情報を出発点にした四案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最初の一案は、自己申告と星群の演出を不採用にして保留中である。</p>
       <div className="story-candidates">
-        {briefs.map((brief, index) => {
+        {activeBriefs.map((brief) => {
+          const index = briefs.findIndex((item) => item.id === brief.id);
           const prototype = prototypes[index];
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : "tertiary-story"}`} key={brief.id}>
@@ -40,6 +43,7 @@ export default function Reports() {
           </article>;
         })}
       </div>
+      {parkedBriefs.length > 0 && <p className="story-section-intro">保留中：{parkedBriefs.map((brief) => `${brief.title}（${brief.status}）`).join(" / ")}</p>}
     </section>
 
     <section className="story-memo" aria-labelledby="production-memo-title">
