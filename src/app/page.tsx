@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 白紙化後のハーネスループ
-          #009：「はじめての合図」を辛口評価し、自己申告と星群の演出を不採用にしました。
+          #010：「未完の便り」を、応援が叶わず終わる時の一度きりの返事として発散しました。
         </div>
       </section>
       <section className="signal-grid">
@@ -76,7 +76,7 @@ export default function Home() {
             <i /> RESEARCH SYNTHESIZED
           </div>
           <p>
-            旧生成物は除去済み。ゼロベースの3案を記録し、各案を辛口評価から改善します。
+            旧生成物は除去済み。ゼロベースの4案を記録し、各案を辛口評価から改善します。
           </p>
           <Link href="/reports" className="text-link">
             生成結果をプレビュー <ArrowUpRight size={15} />
