@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 白紙化後のハーネスループ
-          #001：「はじめての合図」を、初めての人が自分の距離で応援を始める仮説として起案しました。
+          #006：「木陰を返す」を、管理責任を参加者へ渡さない季節の10分枠として再設計しました。
         </div>
       </section>
       <section className="signal-grid">
@@ -76,7 +76,7 @@ export default function Home() {
             <i /> RESEARCH SYNTHESIZED
           </div>
           <p>
-            旧生成物は除去済み。公式要件と新規調査から、ゼロベースの仮説を1本起案中です。
+            旧生成物は除去済み。ゼロベースの2案を記録し、片方を辛口評価から改善中です。
           </p>
           <Link href="/reports" className="text-link">
             生成結果をプレビュー <ArrowUpRight size={15} />
