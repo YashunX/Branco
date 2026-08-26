@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BranCo!「応援」— 改善ハーネス・ワークスペース
 
-## Getting Started
+第15回 BranCo!（2026年テーマ「応援」）に向けた、チームの調査・発想・レビュー・提出ドラフトを共有するためのNext.jsアプリです。
 
-First, run the development server:
+このREADMEは、別のデバイスや別のAIコーディング環境（Codex CLI、Cloud Code、Anti-Gravity CLIなど）で作業を再開するときの引き継ぎ資料です。画面上の一時的な会話よりも、このファイルとGitの履歴をプロジェクトの正本として扱います。
+
+## プロジェクトの目的
+
+- 「応援」を、INPUT（発見）→ CONCEPT（意味づけ）→ OUTPUT（ブランド体験）へ変換する
+- 過去に考えたデジタルデトックス案やホワイトボードを、固定案ではなく再利用可能なナレッジとして保存する
+- AIの生成結果、調査ソース、生成日時、レビュー内容、採用・保留理由をあとから追えるようにする
+- チームメンバーや先生に見せられる、視認性の高い共有ページを維持する
+
+## 現在の公開先
+
+- 本番サイト: <https://branco-six.vercel.app>
+- Vercelプロジェクト: `yashunxs-projects/branco`
+- Vercelアカウント: **YashunX（個人用）**
+- Root Directory: リポジトリ直下（`.`）
+
+### アカウント安全ルール（必須）
+
+このプロジェクトは個人制作・実験用です。Propagateのチーム、プロジェクト、Git連携には絶対にデプロイしません。
+
+Vercel操作を行うツールやCLIは問いません。デプロイ・プロジェクト作成・リンクの前に、必ず現在のアカウントとスコープを確認します。
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+vercel whoami
+vercel team ls
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+期待値は `yashunx` / `yashunxs-projects` です。異なる場合（Propagateなど）は処理を停止し、ユーザーに確認します。ログイン情報やトークンをREADME・コード・`.env`に保存しません。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ページ構成
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| URL | 内容 |
+| --- | --- |
+| `/` | プロジェクト概要、テーマ、締切、ハーネスの現在地 |
+| `/research` | BranCo!公式要件、今年のスケジュール、評価観点、調査ソース |
+| `/docs` | 過去案のナレッジと、ホワイトボード原本9枚の画像アーカイブ |
+| `/reports` | 最終成果物のプレビュー、生成日時、入力、フィードバック、改善履歴 |
 
-## Learn More
+## ハーネスの進め方
 
-To learn more about Next.js, take a look at the following resources:
+プレ審査段階では、採点だけで案を絞りすぎず、人が見て「面白い」「これは応援かもしれない」と感じる案も残します。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **ゼロベース発散**: テーマ「応援」から、複数の角度で6案程度を生成する。過去案は事実・問い・観察として参照し、答えをそのまま再利用しない。
+2. **INPUT確認**: 誰の、どんな場面の、どんな未充足を発見したか。自分たちの思い込みと一次情報を分ける。
+3. **CONCEPT確認**: 応援の再定義が一文で伝わるか。新しさ、共感、必然性、覚えやすさを見る。
+4. **OUTPUT確認**: アプリに限らず、行動・接点・儀式・物理体験を含むブランドとして成立するかを見る。
+5. **辛口レビューと改善**: 各案は最大3ループを目安に、発見・コンセプト・ブランド／提出形式の順にレビューする。
+6. **候補整理**: 最終的に有力3案＋評価が割れても残したいワイルドカード1案を比較する。採点は判断材料の一つであり、最終判断ではない。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+各ループでは、最低限次のログを残します。
 
-## Deploy on Vercel
+- 実行日時
+- 使った入力（テーマ、過去ナレッジ、参照ソース）
+- 生成した案と変更点
+- 誰のフィードバックか（例: プロジェクトオーナー、AIレビュー、先生確認待ち）
+- 採点・評価と、その評価に依存しない人間的な所感
+- 次に確認したい質問、未検証の仮説
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 既存のナレッジ
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`public/IMG_1223.jpg`〜`public/IMG_1230.jpg`、`public/IMG_1232.jpg` は、以前のデジタルデトックス検討時に撮影したホワイトボード原本です。`/docs` で次の観点と紐づけて確認できます。
+
+- 見守る応援、推し、仲間・連帯
+- 小さな成功体験、自己肯定感
+- SNS疲れ、スマホ依存、FOMO、退屈
+- 制限後の代替行動（読書・散歩・睡眠など）
+- 応援の再定義と、次に深掘りする問い
+
+チームから受け取ったプレ審査フォーマットの現行ドラフトは、現在の検討の出発点です。そこでは「応援を、行動に変える。」「今日の自分を応援する、新しい習慣。」と、今日の応援カレンダー案を検討していました。新しい案を作るときは、これを既定路線にせず、別角度の案も必ず発散します。
+
+## 開発
+
+```bash
+npm install
+npm run dev
+```
+
+ブラウザで <http://localhost:3000> を開きます。
+
+検証コマンド:
+
+```bash
+npm run lint
+npm run build
+```
+
+## デプロイ
+
+GitHubの `YashunX/Branco` の `main` ブランチと、Vercelの `yashunxs-projects/branco` を対応させます。どのAI環境から操作しても、必ずアカウント確認を先に行います。
+
+```bash
+vercel whoami                 # yashunx であることを確認
+vercel team ls                # yashunxs-projects のみを確認
+vercel link --scope yashunxs-projects --project branco --yes
+vercel deploy --prod --scope yashunxs-projects --yes
+```
+
+`vercel alias` は通常の手順では使いません。既存の本番ドメインへの反映は `--prod` に任せます。現在のCLIアカウントが期待値と違えばデプロイせず、先にYashunXへ切り替えます。
+
+## 別デバイス・別AI環境での再開
+
+```bash
+git clone git@github.com:YashunX/Branco.git
+cd Branco
+npm install
+git log --oneline -5
+cat README.md
+npm run lint
+npm run build
+```
+
+ハーネスを再開するときは、まず `/research` と `/docs` を読み、既存の案・ソース・未検証の問いを確認します。過去の生成結果を「正解」として扱わず、テーマ「応援」から新しい角度を少なくとも複数出してから比較してください。
+
+AIツールを変更しても、次の原則は変えません。
+
+- ユーザーの指示・フィードバックを最新の入力として扱う
+- 調査したURL、確認日、利用箇所を記録する
+- 生成物だけでなく、生成日時・入力・レビュー・変更理由を残す
+- 先生確認前の案は「ドラフト」と明記する
+- 不明なVercelアカウントや所属先を推測せず、必ず確認する
+
+## 参照ソース
+
+調査の根拠とURLはサイトの `/research` に記録します。主な参照先はBranCo!公式サイト、公式FAQ・募集要項、公式note等です。新しい調査を行った場合は、サイトのレポートに「サイト名・URL・確認日・何に使ったか」を追記します。
+
