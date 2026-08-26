@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 白紙化後のハーネスループ
-          #007：「ひとつ、たのむ」を、頼るための説明を一人で抱えない依頼カードとして発散しました。
+          #008：「あけておく」を、支える側が小さな余白を先に示すカードとして再設計しました。
         </div>
       </section>
       <section className="signal-grid">
