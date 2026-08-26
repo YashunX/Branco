@@ -73,11 +73,11 @@ export default function Reports() {
             終わった挑戦にも、<em>拍手を残す。</em>
           </h1>
           <p>
-            公式ブリーフからゼロベースで6案を生成し、辛口レビューを経て1案を次の検証へ送った記録。
+            公式ブリーフからゼロベースで6案を生成した発散回の記録。以後の改善履歴はハーネスで継続しています。
           </p>
         </div>
-        <a href="#trace" className="ghost-button">
-          <FileText size={17} /> 生成ログを見る
+        <a href="/harness" className="ghost-button">
+          <FileText size={17} /> 最新ループを見る
         </a>
       </div>
 

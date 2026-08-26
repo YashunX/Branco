@@ -1012,6 +1012,34 @@ h2 {
 .compact-sources {
   margin-top: 24px;
 }
+.harness-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: flex-start;
+}
+.harness-heading h1 { font-size: clamp(37px, 5vw, 60px); margin: 12px 0; }
+.harness-heading p { color: var(--muted); font-size: 13px; line-height: 1.8; max-width: 620px; }
+.harness-rule { max-width: 280px; background: #e4ece6; color: var(--green); padding: 16px; display: flex; gap: 10px; font-size: 12px; line-height: 1.7; }
+.branch-section, .loop-timeline, .harness-protocol { margin-top: 34px; }
+.branch-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.branch-tabs button { border: 1px solid var(--line); background: var(--cream); padding: 12px 16px; font-family: inherit; color: var(--ink); cursor: pointer; text-align: left; }
+.branch-tabs button.active { background: var(--ink); color: white; }
+.branch-tabs small { display: block; color: var(--accent); font-size: 9px; letter-spacing: .1em; margin-bottom: 4px; }
+.active-branch { margin-top: 18px; background: var(--ink); color: white; padding: 26px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.active-branch h2 { font-size: 33px; margin: 8px 0; }
+.active-branch p { color: #d2cbc1; margin: 0; font-family: var(--font-serif), serif; }
+.branch-status { display: grid; gap: 5px; justify-items: end; color: #d2cbc1; font-size: 11px; }
+.branch-status svg { color: var(--accent); }.branch-status b { color: white; }.branch-status span { text-transform: uppercase; letter-spacing: .1em; }
+.loop-timeline { display: grid; gap: 16px; }
+.loop-card { display: grid; grid-template-columns: 88px minmax(0, 1fr) 120px; border: 1px solid var(--line); background: var(--cream); }
+.loop-index { background: #e4ece6; padding: 20px 14px; display: flex; flex-direction: column; gap: 6px; color: var(--green); }.loop-index b { font-size: 23px; }.loop-index span { font-size: 10px; letter-spacing: .1em; }.loop-index i { display: none; }
+.loop-main { padding: 20px; }.loop-main h3 { font-family: var(--font-serif), serif; font-size: 20px; font-weight: 500; margin: 10px 0 18px; line-height: 1.55; }
+.loop-detail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }.loop-detail b, .loop-card footer b { color: var(--green); font-size: 9px; letter-spacing: .1em; }.loop-detail p, .loop-card footer p { font-size: 11px; color: var(--muted); line-height: 1.7; margin: 6px 0 0; }
+.score-stack { border-left: 1px solid var(--line); padding: 17px 13px; display: grid; align-content: start; gap: 8px; }.score-stack div { display: flex; justify-content: space-between; gap: 5px; font-size: 10px; }.score-stack span { color: var(--muted); }.score-stack b { font-weight: 600; }
+.loop-card footer { grid-column: 2 / 4; border-top: 1px solid var(--line); padding: 14px 20px; display: grid; grid-template-columns: 105px 1fr; column-gap: 12px; }.loop-card footer p { margin: 0 0 10px; }
+.harness-protocol { border-top: 2px solid var(--ink); padding-top: 20px; }.harness-protocol h2 { font-size: 25px; margin: 8px 0 14px; }.harness-protocol ol { max-width: 750px; padding-left: 22px; }.harness-protocol li { padding: 8px 0; color: var(--muted); font-size: 13px; line-height: 1.7; }.harness-protocol p { background: #f3dfd7; padding: 14px; font-size: 12px; line-height: 1.7; }.harness-protocol code { font-size: 11px; }
+.empty-branch { margin-top: 18px; padding: 30px; border: 1px dashed var(--line); }.empty-branch h2 { font-size: 24px; }.empty-branch p { color: var(--muted); font-size: 13px; }
 @media (max-width: 850px) {
   .sidebar {
     position: static;
@@ -1059,6 +1087,7 @@ h2 {
   .hero-head,
   .research-title,
   .report-top,
+  .harness-heading,
   .next-step {
     align-items: flex-start;
     flex-direction: column;
@@ -1095,4 +1124,12 @@ h2 {
   .sidebar nav a svg {
     display: none;
   }
+  .harness-rule { max-width: none; }
+  .active-branch { align-items: flex-start; flex-direction: column; }
+  .branch-status { justify-items: start; }
+  .loop-card { grid-template-columns: 1fr; }
+  .loop-index { flex-direction: row; align-items: center; }
+  .loop-detail { grid-template-columns: 1fr; }
+  .score-stack { border-left: 0; border-top: 1px solid var(--line); grid-template-columns: repeat(2, 1fr); }
+  .loop-card footer { grid-column: auto; grid-template-columns: 1fr; }
 }

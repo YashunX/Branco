@@ -7,6 +7,7 @@ import {
   FileText,
   LayoutDashboard,
   Sparkles,
+  Workflow,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -48,6 +49,9 @@ export default function RootLayout({
               </Link>
               <Link href="/reports">
                 <FileText size={17} /> Final report
+              </Link>
+              <Link href="/harness">
+                <Workflow size={17} /> Improvement loop
               </Link>
             </nav>
             <div className="sidebar-footer">
