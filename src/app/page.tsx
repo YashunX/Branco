@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 白紙化後のハーネスループ
-          #008：「あけておく」を、支える側が小さな余白を先に示すカードとして再設計しました。
+          #009：「はじめての合図」を辛口評価し、自己申告と星群の演出を不採用にしました。
         </div>
       </section>
       <section className="signal-grid">

@@ -8,7 +8,7 @@ export type Loop = {
 export type Branch = { id: string; title: string; status: "active" | "parked" | "wildcard"; premise: string; loops: Loop[] };
 
 export type PreScreenBrief = {
-  id: string; title: string; role: string; line: string; background: string; tension: string; redefinition: string; question: string; input: string; concept: string; prototype: string; whyThisForm: string; presentationScene: string; validation: string; status: "人の確認待ち" | "公開情報を確認";
+  id: string; title: string; role: string; line: string; background: string; tension: string; redefinition: string; question: string; input: string; concept: string; prototype: string; whyThisForm: string; presentationScene: string; validation: string; status: "人の確認待ち" | "公開情報を確認" | "保留 / 再発散待ち";
 };
 
 export type ReviewQuestion = { candidate: string; question: string; whyItMatters: string };
@@ -28,7 +28,7 @@ export const harness = {
     {
       id: "first-cheer",
       title: "はじめての合図",
-      role: "ゼロベース案 / 改善候補",
+      role: "ゼロベース案 / 保留",
       line: "初めての人を、作法でなく『最初の光』として迎える応援。",
       background: "初めて行くライブやスポーツ観戦には、コール、拍手、ペンライト、ファン同士の暗黙の作法がある。楽しみに来た人ほど、知らないことで場を壊さないかを気にして、声を出せなくなる。",
       tension: "既存の応援ガイドは、参加の仕方を分かりやすく教える。しかし、初めての人が欲しいのは、ベテランと同じように振る舞うための知識だけではない。知らないままそこにいてよいという確かさである。",
@@ -40,7 +40,7 @@ export const harness = {
       whyThisForm: "チケットなら、初めてであることを周囲へ告白せずに選べる。会場スクリーンへは区別のない光だけが出るため、既存ファンは新しい人を“教える対象”でなく、自分にもあった最初の時間として思い出せる。ガイドページと違い、知識を増やさず、開演前の一回だけ会場の関係を変える。ただし、五秒の演出が歓迎でなく安い演出に見えないかは未検証である。",
       presentationScene: "初めて来た人が、入場前のチケットに『今日が、はじめて』を押す。同じ頃、別の既存ファンが『私にも、最初があった』を押す。開演の暗転直前、二人の区別のない小さな光を含む星群が五秒だけスクリーンに現れ、すぐ消える。",
       validation: "初めてを選ぶことは本当に安全か。既存ファンは自分の文化を歓迎の形へ変えられるか。主催者の演出コストに見合うほど、五秒の体験に意味があるか。",
-      status: "人の確認待ち",
+      status: "保留 / 再発散待ち",
     },
     {
       id: "return-the-shade",
@@ -78,21 +78,6 @@ export const harness = {
     },
   ] satisfies PreScreenBrief[],
   reviewQuestions: [
-    {
-      candidate: "はじめての合図",
-      question: "『今日が、はじめて』を一人で押し、開演前の星群に混ざる五秒の体験は、歓迎として届きますか。それとも、初めてであることを意識させすぎますか。",
-      whyItMatters: "負担になるなら、光や画面を磨く前に『最初の自分に居場所をつくる』というコンセプトを捨てる。",
-    },
-    {
-      candidate: "はじめての合図",
-      question: "『私にも、最初があった』という選択は、既存のファンに自分たちの作法を否定された感覚なく、新しい人を迎える役割を渡せますか。",
-      whyItMatters: "既存の文化を薄めるなら、二つの選択をやめ、ファンと主催者の関係を別の形で設計し直す。",
-    },
-    {
-      candidate: "はじめての合図",
-      question: "個人では区別されず、会場では一つの星群になるチケット体験に、開演演出としての必然性はありますか。",
-      whyItMatters: "五秒の演出がただの装飾なら、画面や星群を完成形にせず、入場前の別の関係づくりから作り直す。",
-    },
     {
       candidate: "木陰を返す",
       question: "木のそばの標識が知らせる『秋に10分だけ葉を集める日』は、木を応援する自然な入口に見えますか。それとも、木陰の利用者へ負債を作りますか。",
@@ -136,6 +121,11 @@ export const harness = {
       sources: [{ name: "初めての日本代表戦 観戦ガイド", url: "https://www.jfa.jp/national_team/guide/guide_02.html" }, { name: "初めての＝LOVEライブ 完全ガイド", url: "https://ikorabucall.com/first-live-guide/" }],
     },
     {
+      observation: "会場スポーツ観戦の阻害要因を扱う公開研究では、無関心、環境的制限、人的欠如、メディアの影響が区別されている。別の研究では、時間、距離、情報不足、同伴者不在、コストなど複数の観戦阻害要因が抽出されている。",
+      implication: "『はじめての合図』は、独特の作法による緊張だけを一つの光の演出で解こうとしていた。初参加の障壁を単一化しているため、自己申告と星群の設計は保留にし、初めての人が自分の距離を決められる別の体験から再発散する。",
+      sources: [{ name: "女子大学生における会場でのスポーツ観戦状況と阻害要因との関係", url: "https://www.jstage.jst.go.jp/article/tfu/14/0/14_89/_article/-char/ja" }, { name: "テニス参加者の観戦阻害要因に関する検討", url: "https://www.jstage.jst.go.jp/article/sposun/22/2/22_311/_article/-char/ja/" }],
+    },
+    {
       observation: "住宅地の巨樹に関する研究では、所有者が落ち葉による近隣への迷惑を不安に感じる一方、木への住民の愛着は距離によって異なることが報告されている。別の研究では、沿道住民の街路樹維持管理への参加意欲は、樹木の価値や役割の認識と関係することが示されている。",
       implication: "『木陰を返す』は、木の価値を説明するだけでなく、恩恵を受ける人と日常の負担を担う人の距離を、季節の10分で近づけられるかを検証する。ただし、清掃参加が負担軽減になることはまだ主張しない。",
       sources: [{ name: "住居系市街地における巨樹に係わる住民意識に関する研究", url: "https://cir.nii.ac.jp/crid/1390001205669031680" }, { name: "沿道住民の街路樹の維持管理への参加意欲に影響する要因の構造", url: "https://www.jstage.jst.go.jp/article/ceispapers/ceis32/0/ceis32_197/_article/-char/ja/" }],
@@ -151,7 +141,7 @@ export const harness = {
       sources: [{ name: "家族介護者はどのような支援を活用しているか", url: "https://www.jstage.jst.go.jp/article/jjcgp/7/0/7_4/_article/-char/ja" }, { name: "援助要請の関連要因についての系統的レビュー", url: "https://www.jstage.jst.go.jp/article/cou/56/2/56_79/_article/-char/ja" }],
     },
   ] satisfies ArchiveObservation[],
-  prototypePreviews: [{ id: "first-cheer-preview", title: "はじめての合図 / 最初の光", status: "改善候補 / 人の確認待ち", front: "今日が、はじめて。", inside: "私にも、最初があった。", interaction: "入場前に一人で選び、開演直前に区別のない星群として五秒だけ会場に現れる。" }, { id: "return-shade-preview", title: "木陰を返す / 木陰の標識", status: "改善候補 / 人の確認待ち", front: "この木は夏に木陰をつくる。", inside: "秋に、10分だけ葉を集める日がある。", interaction: "夏の標識が秋に反転し、管理チームが担う10分枠へ任意で参加する。" }, { id: "one-small-ask-preview", title: "あけておく / 余白カード", status: "改善候補 / 人の確認待ち", front: "金曜18時、", inside: "夕食を置ける。", interaction: "支える側が一つの余白を先に書き、介護を担う人は必要な時だけ受け取る。" }] satisfies PrototypePreview[],
+  prototypePreviews: [{ id: "first-cheer-preview", title: "はじめての合図 / 最初の光", status: "保留 / 再発散待ち", front: "今日が、はじめて。", inside: "私にも、最初があった。", interaction: "自己申告と星群の演出は、初参加の障壁を単一化しているため不採用として記録する。" }, { id: "return-shade-preview", title: "木陰を返す / 木陰の標識", status: "改善候補 / 人の確認待ち", front: "この木は夏に木陰をつくる。", inside: "秋に、10分だけ葉を集める日がある。", interaction: "夏の標識が秋に反転し、管理チームが担う10分枠へ任意で参加する。" }, { id: "one-small-ask-preview", title: "あけておく / 余白カード", status: "改善候補 / 人の確認待ち", front: "金曜18時、", inside: "夕食を置ける。", interaction: "支える側が一つの余白を先に書き、介護を担う人は必要な時だけ受け取る。" }] satisfies PrototypePreview[],
   branches: [{
     id: "zero-base-20260826", title: "白紙からの探索", status: "parked", premise: "過去の生成物を持ち込まず、『応援』が必要になる最初の瞬間を新しく探す。",
     loops: [{
@@ -181,6 +171,15 @@ export const harness = {
       scores: { input: 29, concept: 29, output: 23, story: 15, human: 6 }, next: "初めての人・既存ファン・主催者に、二つの選択と五秒の星群を見せ、歓迎／圧力／装飾のどれに見えるかを確認する。",
       model: "Terra", modelReason: "否定的評価を受け、コンセプトと最初の体験を一本化する最小プロトタイプへ改善するため標準モデルを使用。", evidence: "人の確認待ち",
       sources: [{ name: "ご当地アイドルの古参ファンの体験を追体験するノベルゲームによる新規ファン獲得支援の試み", url: "https://cir.nii.ac.jp/crid/1050566774745537536", usedFor: "新規参加の障壁を扱う出発点" }, { name: "アイドルに対するファンの心理的所有感とその影響について", url: "https://www.jstage.jst.go.jp/article/marketing/43/1/43_2023.034/_article/-char/ja/", usedFor: "既存ファンの仲間意識と競争意識を単純化しないための観察材料" }],
+    }, {
+      id: "009", date: "2026.08.26", phase: "評価", question: "初めてであることを選ばせる五秒の星群は、本当に参加の障壁を下げるか。",
+      input: ["追加調査では、会場観戦の阻害要因は独特なルールだけではなく、無関心、人的欠如、情報不足、時間、距離、コストなど複数あることを確認した。初参加者を一つの属性として扱うだけでは、その場へ来られない理由も、来ても声を出せない理由も混ぜてしまう。", "#003の『最初の光』は、初めての人が自分で『今日が、はじめて』を選び、既存ファンとともに星群になる設計だった。匿名でも、初めてを意識させる選択を会場体験へ足している。", "既存のファン文化が障壁になり得るという研究はあるが、星群の演出がその障壁を下げる証拠はない。初参加者にも既存ファンにも、新しい参加の役割を求めることになる。"],
+      output: "『最初の光』を提出候補から保留にした。『今日が、はじめて』と『私にも、最初があった』の選択、五秒の星群、初心者を歓迎として可視化するという出力を不採用にする。残す問いは、初めての人が作法を覚える前に、自分の距離を選べる会場をどうつくるかである。",
+      diagnosis: "問題の切り取りは具体的だったが、解決を一つの美しい演出へ急ぎ過ぎた。初参加者を助けると言いながら、本人に属性選択を求め、主催者には新しい演出コストを求めている。次の発散では、初めてであることを言わせず、既存ファンの文化も薄めず、観る・静かにいる・参加する距離を各自が決められる場の設計から始める。",
+      delta: "『歓迎を見せる』星群から、『初参加者に自己申告をさせない』という設計条件へ変更。会場参加の複数の障壁を、一つの象徴で解決したと見なさない。",
+      scores: { input: 29, concept: 24, output: 14, story: 14, human: 5 }, next: "初参加者・既存ファン・主催者の三者が、属性を言わずに自分の参加距離を選べる最初の場面を、既存のガイドと異なる物としてゼロから発散する。",
+      model: "Terra", modelReason: "観戦参加の阻害要因を追加調査し、既存演出が単一の障壁だけを扱う矛盾を否定的に評価するため標準モデルを使用。", evidence: "公開情報を確認",
+      sources: [{ name: "女子大学生における会場でのスポーツ観戦状況と阻害要因との関係", url: "https://www.jstage.jst.go.jp/article/tfu/14/0/14_89/_article/-char/ja", usedFor: "会場観戦の阻害要因が複数あることの観察材料" }, { name: "テニス参加者の観戦阻害要因に関する検討", url: "https://www.jstage.jst.go.jp/article/sposun/22/2/22_311/_article/-char/ja/", usedFor: "時間・情報・同伴者などを含む観戦阻害要因の観察材料" }],
     }],
   }, {
     id: "return-the-shade", title: "木陰を返す", status: "active", premise: "木陰を受け取った人が、落葉の季節に10分だけ返せる応援。",
