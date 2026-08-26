@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 今夜のハーネスループ
-          #002：公式ブリーフを読み込み、既存案を再解釈しました。
+          #003：公式ブリーフから再発散し、「応援の終わり」を検証テーマに選びました。
         </div>
       </section>
       <section className="signal-grid">
