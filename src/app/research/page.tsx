@@ -102,12 +102,12 @@ export default function Research() {
         <div className="section-heading">
           <div>
             <span className="card-label">HARNESS SCORECARD — PROPOSAL</span>
-            <h2>毎ループで採点する4つの観点</h2>
+            <h2>公式5観点と、内部の補助採点</h2>
           </div>
           <span className="score-badge">100 pts</span>
         </div>
         <p className="rubric-intro">
-          これは公式の配点ではなく、公開された審査員コメントから組み立てた内部評価基準です。各案を生成するたびに同じ問いで採点し、弱い工程へ次の調査を返します。
+          公式FAQは「インプット・コンセプト・アウトプット・プレゼンテーション・一貫性」を共通の審査基準として示しています。下の100点は公式配点ではない内部の補助線です。AIの点数で結論を出さず、人の反応は別記録として扱います。
         </p>
         <div className="rubric-grid">
           <article>
@@ -133,9 +133,16 @@ export default function Research() {
           </article>
           <article>
             <b>04 / 15</b>
-            <h3>STORY / ASPIRATION</h3>
+            <h3>PRESENTATION / STORY</h3>
             <p>
               なぜ今このチームがつくるのか。聞き手が「この世界を見たい」と思う物語と、伝わる見せ方があるか。
+            </p>
+          </article>
+          <article>
+            <b>05 / GATE</b>
+            <h3>一貫性</h3>
+            <p>
+              調査で見た生活者の緊張が、コンセプト、具体的な物、見せる場面まで途切れずつながるか。これは点数の足し算でなく、提出前に人が読む必須確認項目です。
             </p>
           </article>
         </div>
