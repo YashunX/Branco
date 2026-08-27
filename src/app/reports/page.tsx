@@ -53,7 +53,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #031</strong><p>第十五枝『入口の条件カード』を起案し、その場で辛口評価した。事前連絡、介助依頼、登録、口コミを捨て、店が実測・更新する具体条件だけを入口で示す形へ絞った。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #032</strong><p>第十五枝『入口の条件カード』を辛口評価して改善した。車椅子だけを想定した表示を捨て、入口・移動・席・トイレ・案内・同伴動物という店側の条件を示す形へ改めた。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
