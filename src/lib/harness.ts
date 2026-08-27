@@ -13,6 +13,7 @@ export type PreScreenBrief = {
 };
 
 export type ReviewQuestion = { candidate: string; question: string; whyItMatters: string };
+export type FeedbackRecord = { date: string; from: string; about: string; summary: string; reflectedIn?: string };
 export type ArchiveObservation = { observation: string; implication: string; sources: { name: string; url: string }[] };
 export type PrototypePreview = { id: string; title: string; status: string; front: string; inside: string; interaction: string };
 
@@ -56,6 +57,7 @@ export const harness = {
     { branchId: "reply-after-speaking", verdict: "改善", reason: "意見箱に返事を求める初稿を不採用にし、運営が意見の扱いと次の確認日だけを先に返す形へ絞った。", nextPrompt: "こども・若者、ファシリテーター、自治体担当者に、返答札が意見表明を採点や約束に変えず、対応できない意見も放置せずに扱えるかを確認する。" },
     { branchId: "skip-without-explaining", verdict: "改善", reason: "受け取る品を理由なく選ばせるだけの初稿を不採用にし、在庫・期限・受取方法を運営が先に示し、断る選択を利用記録にしない形へ絞った。", nextPrompt: "食品支援を利用する人、直接提供団体、フードバンクに、断る選択が必要な食料への到達を妨げず、在庫や食品安全の運用を曖昧にしないかを確認する。" },
   ] satisfies BranchDecision[],
+  feedbackRecords: [] satisfies FeedbackRecord[],
   preScreenBriefs: [
     {
       id: "first-cheer",

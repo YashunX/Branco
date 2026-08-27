@@ -1,5 +1,5 @@
 import { ArrowUpRight, Clock3, ExternalLink, FileText, MessageCircle, Sparkles } from "lucide-react";
-import { harness, type ArchiveObservation, type PreScreenBrief, type PrototypePreview } from "../../lib/harness";
+import { harness, type ArchiveObservation, type FeedbackRecord, type PreScreenBrief, type PrototypePreview } from "../../lib/harness";
 
 const storySteps = ["背景", "そこで起きること", "私たちの応援の定義"];
 const generatedPreviews: Record<string, Pick<PrototypePreview, "front" | "inside" | "interaction">> = {
@@ -35,6 +35,7 @@ export default function Reports() {
     "unfinished-letter": prototypes.find((prototype) => prototype.id === "ending-promise-preview"),
   };
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
+  const feedbackRecords: FeedbackRecord[] = harness.feedbackRecords;
   const latestBranch = harness.branches.at(-1);
   const latestLoop = latestBranch?.loops.at(-1);
   const currentReviewQuestions = harness.branches
@@ -104,7 +105,7 @@ export default function Reports() {
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
         <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #{latestLoop?.id ?? "—"}</strong><p>{latestBranch ? `『${latestBranch.title}』の最新更新：${latestLoop?.delta ?? "記録準備中"}` : "最新の生成記録を準備中。"}</p></article>
-        <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
+        <article><span>人からのフィードバック</span><strong>{feedbackRecords.length > 0 ? `${feedbackRecords.length}件を記録` : "まだ未取得"}</strong><p>{feedbackRecords.length > 0 ? feedbackRecords.slice(-2).reverse().map((feedback) => `${feedback.date}／${feedback.from}：${feedback.summary}${feedback.reflectedIn ? `（反映：${feedback.reflectedIn}）` : ""}`).join("　") : "存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・対象案・要旨・反映内容をここに追記する。"}</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
       <div className="story-memo-questions"><div><span className="card-label">NEXT HUMAN CHECK</span><h3>次に、人の言葉で確かめること</h3></div><MessageCircle size={19} /></div>
