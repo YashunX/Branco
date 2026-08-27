@@ -51,7 +51,7 @@ export default function Reports() {
 
     <section className="story-candidate-section">
       <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>{briefs.length}の応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は、休む理由、代役探し、欠席回数、次回参加の約束を入口から外し、チームが代替・中止・次の確認を先に持つ形へ絞った。</p>
+      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は、固定の代替当番、欠席理由の共有、中止を避ける個人連絡網を入口から外し、チームが実施条件・中止条件・次の確認時刻を先に持つ形へ絞った。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
@@ -74,7 +74,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #049</strong><p>第二十九枝『当番にも、休む場所がある』を辛口評価して改善した。休む理由、代役探し、欠席回数、次回参加の約束を捨て、チームが代替・中止・次の確認を先に持つ形へ絞った。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #050</strong><p>第二十九枝『当番にも、休む場所がある』を再度辛口評価して改善した。固定の代替当番を捨て、中止を失敗にせず、実施条件・中止条件・次の確認時刻をチームが先に持つ形へ改めた。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
