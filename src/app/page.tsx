@@ -9,6 +9,7 @@ import {
   FileText,
   Sparkles,
 } from "lucide-react";
+import { harness } from "../lib/harness";
 
 const timeline = [
   ["08/27", "プレ審査・チーム登録", "12:00", "next"],
@@ -19,6 +20,9 @@ const timeline = [
 ];
 
 export default function Home() {
+  const latestBranch = harness.branches.at(-1);
+  const latestLoop = latestBranch?.loops.at(-1);
+  const branchCount = harness.branches.length;
   return (
     <div className="page-shell">
       <section className="hero">
@@ -41,7 +45,7 @@ export default function Home() {
         </div>
         <div className="hero-note">
           <Sparkles size={16} /> 白紙化後のハーネスループ
-          #011：「終わりの約束」を、応援を始める前から終わり方を共有する形へ改善しました。
+          #{latestLoop?.id}：{latestBranch?.title}を、辛口評価とともに記録しました。
         </div>
       </section>
       <section className="signal-grid">
@@ -76,7 +80,7 @@ export default function Home() {
             <i /> RESEARCH SYNTHESIZED
           </div>
           <p>
-            旧生成物は除去済み。ゼロベースの4案を記録し、各案を辛口評価から改善します。
+            旧生成物は除去済み。ゼロベースの{branchCount}案を記録し、各案を辛口評価から改善しています。
           </p>
           <Link href="/reports" className="text-link">
             生成結果をプレビュー <ArrowUpRight size={15} />
@@ -134,7 +138,7 @@ export default function Home() {
               <b>03</b>
               <div>
                 <strong>CONCEPT</strong>
-                <span>新しいブランド仮説を生成・比較</span>
+                <span>{branchCount}のブランド仮説を生成・比較</span>
               </div>
               <span className="now">NOW</span>
             </li>
