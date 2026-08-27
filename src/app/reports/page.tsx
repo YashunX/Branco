@@ -30,11 +30,11 @@ export default function Reports() {
 
     <section className="story-candidate-section">
       <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>{briefs.length}の応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、家族同意、返納日、達成チェック、住所印刷を不採用にし、帰り方を決めない選択も同じ大きさで置く形へ絞った。</p>
+      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、事前フォーム、困りごとの点数化、家族共有、AI判定を不採用にし、話せないことと困りごとの方向だけを窓口へ渡す形へ絞った。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
-          const prototype = prototypes[index] ?? (brief.id === "pet-evacuation-map" ? { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" } : brief.id === "store-entry-card" ? { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" } : brief.id === "season-return" ? { front: "今年、記録が集まった季節", inside: "記録がない場所も、いなかったとは言えません。", interaction: "投稿数・バッジ・ランキング・招待を求めず、運営が検証後の季節の記録と限界を一度だけ返す。" } : brief.id === "heat-pause" ? { front: "涼んでから、入場する", inside: "15:00–15:40に入場できます", interaction: "体調申告・位置情報共有・到着報告・遅延証明を求めず、主催者が当日確認した避難先と入場時間の窓を先に渡す。" } : brief.id === "first-return-home" ? { front: "返納した日、ここからどこへ帰る？", inside: "まだ帰り方を決めない", interaction: "住所・家族同意・返納日・達成チェックを求めず、本人が選ぶ一回の帰り道か、次の相談先だけを置く。" } : { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" });
+          const prototype = prototypes[index] ?? (brief.id === "pet-evacuation-map" ? { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" } : brief.id === "store-entry-card" ? { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" } : brief.id === "season-return" ? { front: "今年、記録が集まった季節", inside: "記録がない場所も、いなかったとは言えません。", interaction: "投稿数・バッジ・ランキング・招待を求めず、運営が検証後の季節の記録と限界を一度だけ返す。" } : brief.id === "heat-pause" ? { front: "涼んでから、入場する", inside: "15:00–15:40に入場できます", interaction: "体調申告・位置情報共有・到着報告・遅延証明を求めず、主催者が当日確認した避難先と入場時間の窓を先に渡す。" } : brief.id === "first-return-home" ? { front: "返納した日、ここからどこへ帰る？", inside: "まだ帰り方を決めない", interaction: "住所・家族同意・返納日・達成チェックを求めず、本人が選ぶ一回の帰り道か、次の相談先だけを置く。" } : brief.id === "silent-start" ? { front: "最初は、話さなくていい", inside: "今は話せない ／ 住まい", interaction: "氏名・住所・収入・詳細な事情を最初に求めず、窓口が静かな席や筆談・通訳、緊急確認の方法を本人と選ぶ。" } : { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" });
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{brief.status}</small></header>
@@ -53,7 +53,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #037</strong><p>第十八枝『返納した日の、最初の帰り道』を辛口評価して改善した。家族同意、返納日、達成チェック、住所印刷を捨て、帰り方を決めない選択も同じ大きさで置く形へ絞った。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #038</strong><p>第十九枝『話せないまま、相談を始める』を辛口評価して改善した。事前フォーム、困りごとの点数化、家族共有、AI判定を捨て、話せないことと困りごとの方向だけを窓口へ渡す形へ絞った。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
