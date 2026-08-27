@@ -28,6 +28,9 @@ export default function Reports() {
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
   const loopSources = harness.branches.flatMap((branch) => branch.loops.flatMap((loop) => loop.sources));
+  const unverifiedBranchIds = new Set(harness.branches
+    .filter((branch) => Boolean(branch.loops.at(-1)))
+    .map((branch) => branch.id));
   const sources = [...archiveObservations.flatMap((item) => item.sources), ...loopSources]
     .filter((source, index, items) => items.findIndex((other) => other.url === source.url) === index);
 
@@ -54,7 +57,7 @@ export default function Reports() {
           const prototype = prototypes[index] ?? generatedPreviews[brief.id] ?? { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" };
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
-            <header><span>{brief.role}</span><small>{index >= 20 ? "AI内改善 / 人の確認待ち" : brief.status}</small></header>
+            <header><span>{brief.role}</span><small>{unverifiedBranchIds.has(brief.id) ? "AI内改善 / 人の確認待ち" : brief.status}</small></header>
             <div className="story-title"><h3>{brief.title}</h3><p>{brief.line}</p></div>
             <div className="story-flow">{steps.map((step, stepIndex) => <div key={storySteps[stepIndex]}><span>0{stepIndex + 1}</span><section><b>{storySteps[stepIndex]}</b><p>{step}</p></section></div>)}</div>
             <div className="story-scene"><span>最初の10秒</span><p>{brief.presentationScene}</p><div className="story-object"><div>{prototype.front}</div><div>{prototype.inside}</div></div><small>{prototype.interaction}</small></div>
