@@ -2,6 +2,21 @@ import { ArrowUpRight, Clock3, ExternalLink, FileText, MessageCircle, Sparkles }
 import { harness, type ArchiveObservation, type PreScreenBrief, type PrototypePreview, type ReviewQuestion } from "../../lib/harness";
 
 const storySteps = ["背景", "そこで起きること", "私たちの応援の定義"];
+const generatedPreviews: Record<string, Pick<PrototypePreview, "front" | "inside" | "interaction">> = {
+  "pet-evacuation-map": { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" },
+  "store-entry-card": { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" },
+  "season-return": { front: "今年、記録が集まった季節", inside: "記録がない場所も、いなかったとは言えません。", interaction: "投稿数・バッジ・ランキング・招待を求めず、運営が検証後の季節の記録と限界を一度だけ返す。" },
+  "heat-pause": { front: "涼んでから、入場する", inside: "15:00–15:40に入場できます", interaction: "体調申告・位置情報共有・到着報告・遅延証明を求めず、主催者が当日確認した避難先と入場時間の窓を先に渡す。" },
+  "first-return-home": { front: "返納した日、ここからどこへ帰る？", inside: "まだ帰り方を決めない", interaction: "住所・家族同意・返納日・達成チェックを求めず、本人が選ぶ一回の帰り道か、次の相談先だけを置く。" },
+  "silent-start": { front: "最初は、話さなくていい", inside: "今は話せない ／ 住まい", interaction: "氏名・住所・収入・詳細な事情を最初に求めず、窓口が静かな席や筆談・通訳、緊急確認の方法を本人と選ぶ。" },
+  "unnamed-place": { front: "今日は、何もしないでここにいる", inside: "まだ決めない", interaction: "活動選択・出席・面談・マッチングを求めず、選ばないこと、途中で変えること、理由を言わず帰ることを認める。" },
+  "quiet-collection": { front: "いつもの収集", inside: "出せない日は、ここへ置くだけ", interaction: "専用袋・見守り札・近隣通知・収集回数の公開を求めず、自治体が通常収集と福祉連携の境界を担う。" },
+  "protected-break": { front: "休憩中は、ここに置く", inside: "電話：A　来客：B", interaction: "休憩理由・位置共有・休憩中の連絡当番・残業での穴埋めを求めず、チームが対応の行き先を先に持つ。" },
+  "museum-first": { front: "見る前に、選べる", inside: "音声案内 ／ 静かな時間", interaction: "障害名・診断書・予約・利用履歴・感想投稿を求めず、施設が鑑賞の選択肢と利用条件を先に渡す。" },
+  "outside-shelter": { front: "避難所の外にも、今日の受け取り", inside: "水：13–16時 ／ 在庫の限り ／ 次の更新：18時", interaction: "避難所外にいる理由・位置情報・世帯登録・受け取り写真・SNS投稿を求めず、自治体が終了時の確認先と移動の相談も先に渡す。" },
+  "leave-without-explaining": { front: "今日は、先に帰る", inside: "理由は書かない ／ この連絡は一度きり", interaction: "家族の病名・介護内容・証明書・帰宅後の報告・利用回数の集計・クラス内共有を求めず、学校が安全確認の条件と相談先を先に渡す。" },
+  "treatment-window": { front: "治療のために、言い直さない", inside: "時間をずらす ／ まず相談する", interaction: "診断名の必須入力・上司への病歴説明・同僚への一斉通知・利用回数のランキングを求めず、職場が選択肢と情報の境界を先に渡す。" },
+};
 
 export default function Reports() {
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
@@ -34,7 +49,7 @@ export default function Reports() {
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
-          const prototype = prototypes[index] ?? (brief.id === "pet-evacuation-map" ? { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" } : brief.id === "store-entry-card" ? { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" } : brief.id === "season-return" ? { front: "今年、記録が集まった季節", inside: "記録がない場所も、いなかったとは言えません。", interaction: "投稿数・バッジ・ランキング・招待を求めず、運営が検証後の季節の記録と限界を一度だけ返す。" } : brief.id === "heat-pause" ? { front: "涼んでから、入場する", inside: "15:00–15:40に入場できます", interaction: "体調申告・位置情報共有・到着報告・遅延証明を求めず、主催者が当日確認した避難先と入場時間の窓を先に渡す。" } : brief.id === "first-return-home" ? { front: "返納した日、ここからどこへ帰る？", inside: "まだ帰り方を決めない", interaction: "住所・家族同意・返納日・達成チェックを求めず、本人が選ぶ一回の帰り道か、次の相談先だけを置く。" } : brief.id === "silent-start" ? { front: "最初は、話さなくていい", inside: "今は話せない ／ 住まい", interaction: "氏名・住所・収入・詳細な事情を最初に求めず、窓口が静かな席や筆談・通訳、緊急確認の方法を本人と選ぶ。" } : brief.id === "unnamed-place" ? { front: "今日は、何もしないでここにいる", inside: "まだ決めない", interaction: "活動選択・出席・面談・マッチングを求めず、選ばないこと、途中で変えること、理由を言わず帰ることを認める。" } : brief.id === "quiet-collection" ? { front: "いつもの収集", inside: "出せない日は、ここへ置くだけ", interaction: "専用袋・見守り札・近隣通知・収集回数の公開を求めず、自治体が通常収集と福祉連携の境界を担う。" } : brief.id === "protected-break" ? { front: "休憩中は、ここに置く", inside: "電話：A　来客：B", interaction: "休憩理由・位置共有・休憩中の連絡当番・残業での穴埋めを求めず、チームが対応の行き先を先に持つ。" } : brief.id === "museum-first" ? { front: "見る前に、選べる", inside: "音声案内 ／ 静かな時間", interaction: "障害名・診断書・予約・利用履歴・感想投稿を求めず、施設が鑑賞の選択肢と利用条件を先に渡す。" } : brief.id === "outside-shelter" ? { front: "避難所の外にも、今日の受け取り", inside: "水：13–16時 ／ 在庫の限り ／ 次の更新：18時", interaction: "避難所外にいる理由・位置情報・世帯登録・受け取り写真・SNS投稿を求めず、自治体が終了時の確認先と移動の相談も先に渡す。" } : brief.id === "leave-without-explaining" ? { front: "今日は、先に帰る", inside: "理由は書かない ／ この連絡は一度きり", interaction: "家族の病名・介護内容・証明書・帰宅後の報告・利用回数の集計・クラス内共有を求めず、学校が安全確認の条件と相談先を先に渡す。" } : brief.id === "treatment-window" ? { front: "治療のために、言い直さない", inside: "時間をずらす ／ まず相談する", interaction: "診断名の必須入力・上司への病歴説明・同僚への一斉通知・利用回数のランキングを求めず、職場が選択肢と情報の境界を先に渡す。" } : { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" });
+          const prototype = prototypes[index] ?? generatedPreviews[brief.id] ?? { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" };
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{brief.status}</small></header>
