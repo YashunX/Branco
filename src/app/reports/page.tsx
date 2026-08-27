@@ -28,6 +28,7 @@ export default function Reports() {
   const shortlist = activeBriefs.slice(-6).reverse();
   const parkedBriefs = briefs.filter((brief) => brief.status === "保留 / 再発散待ち");
   const prototypes: PrototypePreview[] = harness.prototypePreviews;
+  const prototypeByBriefId = Object.fromEntries(prototypes.map((prototype) => [prototype.id.replace(/-preview$/, ""), prototype]));
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
   const loopSources = harness.branches.flatMap((branch) => branch.loops.flatMap((loop) => loop.sources));
@@ -63,7 +64,7 @@ export default function Reports() {
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
-          const prototype = prototypes[index] ?? generatedPreviews[brief.id] ?? { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" };
+          const prototype = prototypeByBriefId[brief.id] ?? generatedPreviews[brief.id] ?? { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" };
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{unverifiedBranchIds.has(brief.id) ? "AI内改善 / 人の確認待ち" : brief.status}</small></header>
