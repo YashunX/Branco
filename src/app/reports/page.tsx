@@ -31,7 +31,7 @@ export default function Reports() {
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
-          const prototype = prototypes[index];
+          const prototype = prototypes[index] ?? { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" };
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{brief.status}</small></header>
