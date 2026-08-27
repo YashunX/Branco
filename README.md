@@ -110,6 +110,8 @@ vercel deploy --prod --scope yashunxs-projects --yes
 
 `vercel alias` は通常の手順では使いません。既存の本番ドメインへの反映は `--prod` に任せます。現在のCLIアカウントが期待値と違えばデプロイせず、先にYashunXへ切り替えます。
 
+改善ループでは、毎周回で `npm run lint` と `npm run build`、GitHubへのプッシュまで行います。本番デプロイは候補・レポート・UIのまとまった節目で行い、細かな表示修正ごとには行いません。Vercelの日次上限に達した場合は、デプロイを再試行せず、Git上の検証済みコミットを積み上げ、上限解除後に最新コミットだけを `--prod` で反映します。
+
 ## 別デバイス・別AI環境での再開
 
 ```bash
