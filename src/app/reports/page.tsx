@@ -1,5 +1,5 @@
 import { ArrowUpRight, Clock3, ExternalLink, FileText, MessageCircle, Sparkles } from "lucide-react";
-import { harness, type ArchiveObservation, type PreScreenBrief, type PrototypePreview, type ReviewQuestion } from "../../lib/harness";
+import { harness, type ArchiveObservation, type PreScreenBrief, type PrototypePreview } from "../../lib/harness";
 
 const storySteps = ["背景", "そこで起きること", "私たちの応援の定義"];
 const generatedPreviews: Record<string, Pick<PrototypePreview, "front" | "inside" | "interaction">> = {
@@ -34,8 +34,15 @@ export default function Reports() {
     "return-the-shade": prototypes.find((prototype) => prototype.id === "return-shade-preview"),
     "unfinished-letter": prototypes.find((prototype) => prototype.id === "ending-promise-preview"),
   };
-  const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
+  const latestBranch = harness.branches.at(-1);
+  const latestLoop = latestBranch?.loops.at(-1);
+  const currentReviewQuestions = harness.branches
+    .slice()
+    .reverse()
+    .map((branch) => ({ branch, loop: branch.loops.at(-1) }))
+    .filter(({ loop }) => Boolean(loop))
+    .slice(0, 6);
   const latestSourcesByBriefId = Object.fromEntries(harness.branches.map((branch) => [branch.id, branch.loops.at(-1)?.sources ?? []]));
   const loopSources = harness.branches.flatMap((branch) => branch.loops.flatMap((loop) => loop.sources));
   const unverifiedBranchIds = new Set(harness.branches
@@ -96,12 +103,12 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #054</strong><p>第三十一枝『受け取らない、を選べる』を辛口評価して改善した。断った理由や受取履歴を捨て、品目・量・期限・受取時間・確認時刻を先に持つ形へ改めた。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #{latestLoop?.id ?? "—"}</strong><p>{latestBranch ? `『${latestBranch.title}』の最新更新：${latestLoop?.delta ?? "記録準備中"}` : "最新の生成記録を準備中。"}</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
       <div className="story-memo-questions"><div><span className="card-label">NEXT HUMAN CHECK</span><h3>次に、人の言葉で確かめること</h3></div><MessageCircle size={19} /></div>
-      <div className="story-memo-question-grid">{reviewQuestions.map((item, index) => <article key={item.question}><span>{String(index + 1).padStart(2, "0")} / {item.candidate}</span><h3>{item.question}</h3><p><b>回答で変えること：</b>{item.whyItMatters}</p></article>)}</div>
+      <div className="story-memo-question-grid">{currentReviewQuestions.map(({ branch, loop }, index) => <article key={branch.id}><span>{String(index + 1).padStart(2, "0")} / {branch.title}</span><h3>{loop?.next}</h3><p><b>この問いが残る理由：</b>{loop?.diagnosis}</p></article>)}</div>
     </section>
 
     <section className="story-sources"><div className="section-heading"><div><span className="card-label">SOURCES / WHAT WE ACTUALLY READ</span><h2>調査の根拠</h2></div><ExternalLink size={20} /></div>
