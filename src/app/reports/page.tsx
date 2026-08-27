@@ -29,7 +29,11 @@ export default function Reports() {
   const shortlist = activeBriefs.slice(-6).reverse();
   const parkedBriefs = briefs.filter((brief) => brief.status === "保留 / 再発散待ち");
   const prototypes: PrototypePreview[] = harness.prototypePreviews;
-  const prototypeByBriefId = Object.fromEntries(prototypes.map((prototype) => [prototype.id.replace(/-preview$/, ""), prototype]));
+  const prototypeByBriefId: Record<string, PrototypePreview | undefined> = {
+    ...Object.fromEntries(prototypes.map((prototype) => [prototype.id.replace(/-preview$/, ""), prototype])),
+    "return-the-shade": prototypes.find((prototype) => prototype.id === "return-shade-preview"),
+    "unfinished-letter": prototypes.find((prototype) => prototype.id === "ending-promise-preview"),
+  };
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
   const latestSourcesByBriefId = Object.fromEntries(harness.branches.map((branch) => [branch.id, branch.loops.at(-1)?.sources ?? []]));
@@ -39,6 +43,11 @@ export default function Reports() {
     .map((branch) => branch.id));
   const sources = [...archiveObservations.flatMap((item) => item.sources), ...loopSources]
     .filter((source, index, items) => items.findIndex((other) => other.url === source.url) === index);
+  const incompleteBriefs = activeBriefs.filter((brief) => !prototypeByBriefId[brief.id] && !generatedPreviews[brief.id] || !(latestSourcesByBriefId[brief.id]?.length));
+
+  if (incompleteBriefs.length > 0) {
+    throw new Error(`提出候補にプレビューまたは出典がありません: ${incompleteBriefs.map((brief) => brief.id).join(", ")}`);
+  }
 
   return <div className="page-shell report-page story-report">
     <header className="story-hero">
