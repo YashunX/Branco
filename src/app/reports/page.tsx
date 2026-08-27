@@ -15,7 +15,7 @@ export default function Reports() {
     <header className="story-hero">
       <div className="eyebrow"><span /> BRANCO! PRE-SCREEN / STORY DRAFT / 2026.08.26</div>
       <h1>初めての声援に、<em>正解をつくらない。</em></h1>
-      <p>これは過去の候補を引き継がず、白紙から始めた六本のストーリーである。応援したいのに輪へ入れない人、応援される木とその近くで日常を担う人、頼りたいのに頼みを言葉にできない人、応援した目標が終わる人、未完成を見せる前で立ち止まる人、そして活動を外れると決めた人。それぞれの最初と終わりの瞬間から考え、一案は辛口評価で保留にした。</p>
+      <p>これは過去の候補を引き継がず、白紙から始めた七本のストーリーである。応援したいのに輪へ入れない人、応援される木とその近くで日常を担う人、頼りたいのに頼みを言葉にできない人、応援した目標が終わる人、未完成を見せる前で立ち止まる人、活動を外れると決めた人、そして休みたい小さな店。それぞれの最初と終わりの瞬間から考え、一案は辛口評価で保留にした。</p>
       <div className="story-hero-note"><b>いまの仮説</b><span>応援は、声を大きくする前に、誰かや何かとの関係を少しだけ結び直すことから始まるかもしれない。</span></div>
     </header>
 
@@ -26,8 +26,8 @@ export default function Reports() {
     </section>
 
     <section className="story-candidate-section">
-      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>六つの応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした六案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最初の一案は、自己申告と星群の演出を不採用にして保留中である。</p>
+      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>七つの応援の物語</h2></div><Sparkles size={20} /></div>
+      <p className="story-section-intro">公開情報を出発点にした七案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最初の一案は、自己申告と星群の演出を不採用にして保留中である。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
