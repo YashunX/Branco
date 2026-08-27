@@ -32,6 +32,7 @@ export default function Reports() {
   const prototypeByBriefId = Object.fromEntries(prototypes.map((prototype) => [prototype.id.replace(/-preview$/, ""), prototype]));
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
+  const latestSourcesByBriefId = Object.fromEntries(harness.branches.map((branch) => [branch.id, branch.loops.at(-1)?.sources ?? []]));
   const loopSources = harness.branches.flatMap((branch) => branch.loops.flatMap((loop) => loop.sources));
   const unverifiedBranchIds = new Set(harness.branches
     .filter((branch) => Boolean(branch.loops.at(-1)))
@@ -66,6 +67,7 @@ export default function Reports() {
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
           const prototype = prototypeByBriefId[brief.id] ?? generatedPreviews[brief.id] ?? { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" };
+          const candidateSources = latestSourcesByBriefId[brief.id] ?? [];
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{unverifiedBranchIds.has(brief.id) ? "AI内改善 / 人の確認待ち" : brief.status}</small></header>
@@ -73,6 +75,7 @@ export default function Reports() {
             <div className="story-flow">{steps.map((step, stepIndex) => <div key={storySteps[stepIndex]}><span>0{stepIndex + 1}</span><section><b>{storySteps[stepIndex]}</b><p>{step}</p></section></div>)}</div>
             <div className="story-scene"><span>最初の10秒</span><p>{brief.presentationScene}</p><div className="story-object"><div>{prototype.front}</div><div>{prototype.inside}</div></div><small>{prototype.interaction}</small></div>
             <div className="story-form-reason"><b>なぜ、この物なのか</b><p>{brief.whyThisForm}</p></div>
+            {candidateSources.length > 0 && <div className="story-candidate-sources"><b>この案の出発点</b><div>{candidateSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>{source.name}<ExternalLink size={12} /></a>)}</div></div>}
             <footer><b>まだ答えられていないこと</b><p>{brief.validation}</p></footer>
           </article>;
         })}
