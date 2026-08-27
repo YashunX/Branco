@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "harness:loop": "node scripts/harness-loop.mjs",
-    "harness:stop": "node scripts/harness-loop.mjs --stop"
+    "lint": "eslint"
   },
   "dependencies": {
     "lucide-react": "^1.23.0",

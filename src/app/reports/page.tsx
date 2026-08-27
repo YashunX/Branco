@@ -10,12 +10,15 @@ export default function Reports() {
   const prototypes: PrototypePreview[] = harness.prototypePreviews;
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
   const archiveObservations: ArchiveObservation[] = harness.archiveObservations;
+  const loopSources = harness.branches.flatMap((branch) => branch.loops.flatMap((loop) => loop.sources));
+  const sources = [...archiveObservations.flatMap((item) => item.sources), ...loopSources]
+    .filter((source, index, items) => items.findIndex((other) => other.url === source.url) === index);
 
   return <div className="page-shell report-page story-report">
     <header className="story-hero">
       <div className="eyebrow"><span /> BRANCO! PRE-SCREEN / STORY DRAFT / 2026.08.27</div>
       <h1>助けを求める前に、<em>応援は届くか。</em></h1>
-      <p>これは過去の候補を引き継がず、白紙から始めた八本のストーリーである。応援したいのに輪へ入れない人、応援される木とその近くで日常を担う人、頼りたいのに頼みを言葉にできない人、応援した目標が終わる人、未完成を見せる前で立ち止まる人、活動を外れると決めた人、休みたい小さな店、そして急に生理用品を必要とする学生。それぞれの最初と終わりの瞬間から考え、一案は辛口評価で保留にした。</p>
+      <p>これは過去の候補を引き継がず、白紙から始めた十本のストーリーである。応援したいのに輪へ入れない人、応援される木とその近くで日常を担う人、頼りたいのに頼みを言葉にできない人、応援した目標が終わる人、未完成を見せる前で立ち止まる人、活動を外れると決めた人、休みたい小さな店、祭りを一日だけ手伝う人、急に生理用品を必要とする学生、そしてベビーカーを固定して発車を待つ親子。それぞれの最初と終わりの瞬間から考え、一案は辛口評価で保留にした。</p>
       <div className="story-hero-note"><b>いまの仮説</b><span>応援は、声を大きくする前に、誰かや何かとの関係を少しだけ結び直すことから始まるかもしれない。</span></div>
     </header>
 
@@ -26,8 +29,8 @@ export default function Reports() {
     </section>
 
     <section className="story-candidate-section">
-      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>八つの応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした八案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、QR認証・配布上限・寄付・感謝を不採用にし、学校が補充責任を持つ形へ改善した。</p>
+      <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>十の応援の物語</h2></div><Sparkles size={20} /></div>
+      <p className="story-section-intro">公開情報を出発点にした十案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、同乗者のカード・QR・待機時間表示・感謝を不採用にし、運行が安全確認の理由を一度だけ共有する形へ改善した。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
@@ -50,7 +53,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #023</strong><p>第十枝『ここから棚』を起案し、その場で辛口評価した。利用者を測るQR認証・配布上限、寄付、感謝をすべて捨て、学校が補充責任を持つ個室内の棚へ絞った。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #024</strong><p>第十一枝『発車まで待てるバス』を起案し、その場で辛口評価した。同乗者の意思表示、QR、待機時間表示、感謝をすべて捨て、運行が安全確認の理由を一度だけ共有する音声へ絞った。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
@@ -59,7 +62,7 @@ export default function Reports() {
     </section>
 
     <section className="story-sources"><div className="section-heading"><div><span className="card-label">SOURCES / WHAT WE ACTUALLY READ</span><h2>調査の根拠</h2></div><ExternalLink size={20} /></div>
-      <div className="story-source-list"><a href="https://branddesigncontest.com/outline/" target="_blank" rel="noreferrer"><span><b>BranCo! 第15回 開催概要・応募要項</b><small>テーマ「応援」と、応援の始まり・終わりという問い</small></span><ArrowUpRight size={17} /></a><a href="https://branddesigncontest.com/faq/" target="_blank" rel="noreferrer"><span><b>BranCo! FAQ</b><small>インプット・コンセプト・アウトプット・プレゼン・一貫性という評価軸</small></span><ArrowUpRight size={17} /></a>{archiveObservations.flatMap((item) => item.sources).filter((source, index, sources) => sources.findIndex((other) => other.url === source.url) === index).map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer"><span><b>{source.name}</b><small>今回の背景・仮説を考えるために確認した公開情報</small></span><ArrowUpRight size={17} /></a>)}</div>
+      <div className="story-source-list"><a href="https://branddesigncontest.com/outline/" target="_blank" rel="noreferrer"><span><b>BranCo! 第15回 開催概要・応募要項</b><small>テーマ「応援」と、応援の始まり・終わりという問い</small></span><ArrowUpRight size={17} /></a><a href="https://branddesigncontest.com/faq/" target="_blank" rel="noreferrer"><span><b>BranCo! FAQ</b><small>インプット・コンセプト・アウトプット・プレゼン・一貫性という評価軸</small></span><ArrowUpRight size={17} /></a>{sources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer"><span><b>{source.name}</b><small>今回の背景・仮説を考えるために確認した公開情報</small></span><ArrowUpRight size={17} /></a>)}</div>
     </section>
 
     <a href="/harness" className="story-harness-link"><FileText size={17} /> 生成・評価・分岐の全記録を見る</a>
