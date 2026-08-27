@@ -20,6 +20,7 @@ const generatedPreviews: Record<string, Pick<PrototypePreview, "front" | "inside
   "language-first": { front: "話す言葉を、先に選ぶ", inside: "英語 ／ 住まい ／ 15時まで", interaction: "国籍の申告・在留カードの撮影・住所の記入・相談履歴の共有・同伴者の登録を求めず、窓口が言語と利用条件を先に渡す。" },
   "team-can-rest": { front: "当番にも、休む場所がある", inside: "実施条件 ／ 中止条件", interaction: "休む理由・代役探し・固定の緊急当番・欠席回数の集計を求めず、チームが実施条件・中止条件・次の確認時刻を先に持つ。" },
   "reply-after-speaking": { front: "言ったあと、どうなったか", inside: "次の確認：9月26日", interaction: "意見ごとの受付番号・採否・賛同数を求めず、運営が読む期限と全体への返答の場を先に示す。" },
+  "skip-without-explaining": { front: "受け取らない、を選べる", inside: "米 2kg ／ 9月末まで", interaction: "理由・家族構成・健康状態を求めず、品目・量・期限・受取時間・確認時刻を先に示し、断る選択を利用資格の判断に使わない。" },
 };
 
 export default function Reports() {
@@ -60,7 +61,7 @@ export default function Reports() {
 
     <section className="story-candidate-section">
       <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>{briefs.length}の応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は、意見ごとの受付番号、採否、賛同数、追加質問を入口から外し、運営が読む期限と全体への返答の場を先に持つ形へ絞った。</p>
+      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は、断った理由、家族構成、健康状態、受取履歴を入口から外し、品目・量・期限・受取時間・確認時刻を先に持つ形へ絞った。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
@@ -83,7 +84,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #052</strong><p>第三十枝『言ったあと、どうなったか』を辛口評価して改善した。意見ごとの採否や受付番号を捨て、運営が読む期限と全体への返答の場を先に持つ形へ改めた。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #054</strong><p>第三十一枝『受け取らない、を選べる』を辛口評価して改善した。断った理由や受取履歴を捨て、品目・量・期限・受取時間・確認時刻を先に持つ形へ改めた。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
