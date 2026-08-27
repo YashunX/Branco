@@ -18,7 +18,7 @@ export default function Reports() {
     <header className="story-hero">
       <div className="eyebrow"><span /> BRANCO! PRE-SCREEN / STORY DRAFT / 2026.08.27</div>
       <h1>助けを求める前に、<em>応援は届くか。</em></h1>
-      <p>これは過去の候補を引き継がず、白紙から始めた{briefs.length}本のストーリーである。応援したいのに輪へ入れない人、応援される木とその近くで日常を担う人、頼りたいのに頼みを言葉にできない人、応援した目標が終わる人、未完成を見せる前で立ち止まる人、活動を外れると決めた人、休みたい小さな店、祭りを一日だけ手伝う人、急に生理用品を必要とする学生、ベビーカーを固定して発車を待つ親子、そして学校を休む朝の本人と保護者。それぞれの最初と終わりの瞬間から考え、一案は辛口評価で保留にした。</p>
+      <p>これは過去の候補を引き継がず、白紙から始めた{briefs.length}本のストーリーである。生活のなかで応援が必要になる最初の瞬間を公開情報から探し、背景、そこで起きる緊張、応援の定義、最初の体験までを一本ずつ組み立てた。一案は辛口評価で保留にし、改善の伸びが止まった枝は別の生活場面へ移している。</p>
       <div className="story-hero-note"><b>いまの仮説</b><span>応援は、声を大きくする前に、誰かや何かとの関係を少しだけ結び直すことから始まるかもしれない。</span></div>
     </header>
 
@@ -30,11 +30,11 @@ export default function Reports() {
 
     <section className="story-candidate-section">
       <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>{briefs.length}の応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、事前登録・首輪タグ・近隣への預かり依頼・SNS投稿を不採用にし、自治体が確認した受入れ条件と代替先を平時の地図で示す形へ絞った。</p>
+      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、投稿数のバッジ、地域ランキング、連続通知、次回への招待を不採用にし、運営が検証後の季節の記録と限界を一度だけ返す形へ絞った。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
-          const prototype = prototypes[index] ?? (brief.id === "pet-evacuation-map" ? { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" } : brief.id === "store-entry-card" ? { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" } : { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" });
+          const prototype = prototypes[index] ?? (brief.id === "pet-evacuation-map" ? { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" } : brief.id === "store-entry-card" ? { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" } : brief.id === "season-return" ? { front: "今年、記録が集まった季節", inside: "記録がない場所も、いなかったとは言えません。", interaction: "投稿数・バッジ・ランキング・招待を求めず、運営が検証後の季節の記録と限界を一度だけ返す。" } : { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" });
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{brief.status}</small></header>
@@ -53,7 +53,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #032</strong><p>第十五枝『入口の条件カード』を辛口評価して改善した。車椅子だけを想定した表示を捨て、入口・移動・席・トイレ・案内・同伴動物という店側の条件を示す形へ改めた。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #033</strong><p>第十六枝『季節の返書』を辛口評価して改善した。投稿数のバッジ、地域ランキング、連続通知、次回への招待を捨て、運営が検証後の季節の記録と限界を一度だけ返す形へ絞った。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
