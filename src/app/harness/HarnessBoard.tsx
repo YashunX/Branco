@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { ArrowRight, GitBranch, RotateCw, ShieldCheck } from "lucide-react";
-import { type Branch, type BranchDecision, type ReviewQuestion, scoreLabels } from "../../lib/harness";
+import { type Branch, type BranchDecision, scoreLabels } from "../../lib/harness";
 
-type Harness = { updatedAt: string; rule: string; modelPolicy: string; submissionRule: string; branchingRule: string; branchDecisions: BranchDecision[]; reviewQuestions: ReviewQuestion[]; branches: Branch[] };
+type Harness = { updatedAt: string; rule: string; modelPolicy: string; submissionRule: string; branchingRule: string; branchDecisions: BranchDecision[]; branches: Branch[] };
 
 export default function HarnessBoard({ harness }: { harness: Harness }) {
   const [branchId, setBranchId] = useState(harness.branches[0].id);
@@ -20,6 +20,12 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
       iterated: harness.branches.filter((item) => item.loops.length > 1).length,
     };
   }, [harness.branches]);
+  const currentReviewQueue = useMemo(() => harness.branches
+    .slice()
+    .reverse()
+    .map((item) => ({ branch: item, loop: item.loops.at(-1) }))
+    .filter((item) => item.loop?.evidence !== "検証済み")
+    .slice(0, 6), [harness.branches]);
 
   return (
     <div className="page-shell harness-page">
@@ -63,7 +69,7 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
       <section className="harness-protocol"><span className="card-label">HOW AN AGENT UPDATES THIS</span><h2>次のループは、前の診断を入力にする。</h2><ol><li>この枝の「次の一手」だけを検証するために、必要最小限の調査をする。</li><li>前回の出力を捨てずに修正し、何が変わったかを明記する。</li><li>点数と人の直感を分けて記録し、伸びなければ別の枝へ切り替える。</li></ol><p>更新元：<code>src/lib/harness.ts</code>。AIコーディング環境を問わず、このデータを更新し、検証後にGitへ残します。</p></section>
       <section className="harness-protocol"><span className="card-label">BRANCHING RULE / THE CORE LOOP</span><h2>伸びない枝を、待機状態にしない。</h2><p>{harness.branchingRule}</p>{decision && <div className="branch-decision"><b>今回の判断：{decision.verdict}</b><p>{decision.reason}</p><p><b>次の発散：</b>{decision.nextPrompt}</p></div>}</section>
 
-      <section className="review-queue"><span className="card-label">INTERNAL MEMO / REVIEW QUEUE</span><h2>人の確認を待つ問い</h2><p>提出レポートには載せない内部メモです。回答が来たら、日時・相手・内容を次ループの入力に記録します。</p><div>{harness.reviewQuestions.map((item, index) => <article key={item.question}><span>{String(index + 1).padStart(2, "0")} / {item.candidate}</span><h3>{item.question}</h3><p><b>回答で変えること：</b>{item.whyItMatters}</p></article>)}</div></section>
+      <section className="review-queue"><span className="card-label">INTERNAL MEMO / REVIEW QUEUE</span><h2>いま人に確かめる問い</h2><p>最新枝から優先して表示する内部メモです。回答が来たら、日時・相手・内容を次ループの入力に記録します。</p><div>{currentReviewQueue.map(({ branch: reviewBranch, loop }, index) => <article key={reviewBranch.id}><span>{String(index + 1).padStart(2, "0")} / {reviewBranch.title}</span><h3>{loop?.next}</h3><p><b>この問いが残る理由：</b>{loop?.diagnosis}</p></article>)}</div></section>
     </div>
   );
 }
