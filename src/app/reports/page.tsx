@@ -18,12 +18,13 @@ const generatedPreviews: Record<string, Pick<PrototypePreview, "front" | "inside
   "treatment-window": { front: "治療のために、言い直さない", inside: "時間をずらす ／ まず相談する", interaction: "診断名の必須入力・上司への病歴説明・同僚への一斉通知・利用回数のランキングを求めず、職場が選択肢と情報の境界を先に渡す。" },
   "reading-shape": { front: "読める形を、先に選ぶ", inside: "音で聞く ／ 文字を変える", interaction: "障害名の申告・診断書・読書履歴の共有・利用回数の記録・感想投稿を求めず、図書館が読み方と利用条件を先に渡す。" },
   "language-first": { front: "話す言葉を、先に選ぶ", inside: "英語 ／ 住まい ／ 15時まで", interaction: "国籍の申告・在留カードの撮影・住所の記入・相談履歴の共有・同伴者の登録を求めず、窓口が言語と利用条件を先に渡す。" },
-  "team-can-rest": { front: "当番にも、休む場所がある", inside: "代替 ／ 中止 ／ 次回", interaction: "休む理由・代役探し・欠席回数の集計・感謝の投稿・次回参加の約束を求めず、チームが代替と中止の判断を先に持つ。" },
+  "team-can-rest": { front: "当番にも、休む場所がある", inside: "実施条件 ／ 中止条件", interaction: "休む理由・代役探し・固定の緊急当番・欠席回数の集計を求めず、チームが実施条件・中止条件・次の確認時刻を先に持つ。" },
 };
 
 export default function Reports() {
   const briefs: PreScreenBrief[] = harness.preScreenBriefs;
   const activeBriefs = briefs.filter((brief) => brief.status !== "保留 / 再発散待ち");
+  const shortlist = activeBriefs.slice(-6).reverse();
   const parkedBriefs = briefs.filter((brief) => brief.status === "保留 / 再発散待ち");
   const prototypes: PrototypePreview[] = harness.prototypePreviews;
   const reviewQuestions: ReviewQuestion[] = harness.reviewQuestions;
@@ -47,6 +48,12 @@ export default function Reports() {
       <span className="card-label">WHY WE REDEFINED SUPPORT</span>
       <h2>応援は、誰かを動かす前に、<br />関係の偏りをほどくことからも始まる。</h2>
       <p>作法を知る人と知らない人。木陰を受け取る人と落葉を引き受ける人。頼ってよいと言われても頼みを作れない人。叶わなかった目標を説明する人と、応援を置いていく人。未完成を抱える人と、それを評価してしまいそうな人。私たちは、応援の前と後にある小さな偏りを、個人の気遣いや善意だけで埋めない入口を探している。</p>
+    </section>
+
+    <section className="story-shortlist" aria-labelledby="shortlist-title">
+      <div className="section-heading"><div><span className="card-label">HUMAN CHECK SHORTLIST</span><h2 id="shortlist-title">今、人に見せる6案</h2></div><MessageCircle size={20} /></div>
+      <p>AI内の改善で閉じず、次に人の言葉で確かめる候補を直近順に置く。</p>
+      <div>{shortlist.map((brief) => <article key={brief.id}><span>{brief.role}</span><h3>{brief.title}</h3><p>{brief.line}</p><small>{brief.validation}</small></article>)}</div>
     </section>
 
     <section className="story-candidate-section">
