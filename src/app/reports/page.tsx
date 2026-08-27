@@ -30,11 +30,11 @@ export default function Reports() {
 
     <section className="story-candidate-section">
       <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>{briefs.length}の応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、暑さ指数アプリ、位置情報共有、利用者レビュー、遅刻理由の申告を不採用にし、予定先が確認済みの避難先と到着猶予を先に渡す形へ絞った。</p>
+      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は同サイクルで、どの予定にも遅刻猶予を渡す初稿を不採用にし、主催者が調整できる公共イベントで入場時間の窓を先に渡す形へ絞った。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
-          const prototype = prototypes[index] ?? (brief.id === "pet-evacuation-map" ? { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" } : brief.id === "store-entry-card" ? { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" } : brief.id === "season-return" ? { front: "今年、記録が集まった季節", inside: "記録がない場所も、いなかったとは言えません。", interaction: "投稿数・バッジ・ランキング・招待を求めず、運営が検証後の季節の記録と限界を一度だけ返す。" } : brief.id === "heat-pause" ? { front: "涼んでから、来てください", inside: "15:20まで理由なしで受付", interaction: "暑さ指数アプリ・位置情報共有・利用者レビュー・遅刻理由の申告を求めず、予定先が確認済みの避難先と到着猶予を先に渡す。" } : { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" });
+          const prototype = prototypes[index] ?? (brief.id === "pet-evacuation-map" ? { front: "同行避難の地図", inside: "ペット飼養場所：屋外テント", interaction: "登録・首輪タグ・近隣への預かり依頼・SNS投稿を求めず、自治体が確認した受入れ条件と代替先を平時の地図で示す。" } : brief.id === "store-entry-card" ? { front: "段差：なし", inside: "入口幅：85cm", interaction: "事前連絡・介助依頼・登録・口コミを求めず、店が実測・更新する具体条件だけを入口に示す。" } : brief.id === "season-return" ? { front: "今年、記録が集まった季節", inside: "記録がない場所も、いなかったとは言えません。", interaction: "投稿数・バッジ・ランキング・招待を求めず、運営が検証後の季節の記録と限界を一度だけ返す。" } : brief.id === "heat-pause" ? { front: "涼んでから、入場する", inside: "15:00–15:40に入場できます", interaction: "体調申告・位置情報共有・到着報告・遅延証明を求めず、主催者が当日確認した避難先と入場時間の窓を先に渡す。" } : { front: "プレビュー準備中", inside: brief.title, interaction: "この案の最初の体験を、次のループで具体化します。" });
           const steps = [brief.background, brief.tension, brief.redefinition];
           return <article className={`story-candidate ${index === 0 ? "primary-story" : index === 1 ? "secondary-story" : index === 2 || index === 3 ? "tertiary-story" : "quaternary-story"}`} key={brief.id}>
             <header><span>{brief.role}</span><small>{brief.status}</small></header>
@@ -53,7 +53,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #034</strong><p>第十七枝『途中で涼んでも、約束はなくならない』を辛口評価して改善した。暑さ指数アプリ、位置情報共有、利用者レビュー、遅刻理由の申告を捨て、予定先が確認済みの避難先と到着猶予を先に渡す形へ絞った。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #035</strong><p>第十七枝『涼んでから、入場する』を辛口評価して改善した。どの予定にも遅刻猶予を渡す初稿を捨て、主催者が調整できる公共イベントだけで入場時間の窓を先に渡す形へ絞った。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
