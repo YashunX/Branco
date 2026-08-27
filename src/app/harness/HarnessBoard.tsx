@@ -11,6 +11,15 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
   const branch = useMemo(() => harness.branches.find((item) => item.id === branchId)!, [branchId, harness.branches]);
   const latest = branch.loops.at(-1);
   const decision = harness.branchDecisions.find((item) => item.branchId === branch.id);
+  const loopSummary = useMemo(() => {
+    const latestLoops = harness.branches.map((item) => item.loops.at(-1)).filter(Boolean);
+    return {
+      total: harness.branches.length,
+      publicEvidence: latestLoops.filter((loop) => loop?.evidence === "公開情報を確認").length,
+      humanCheck: latestLoops.filter((loop) => loop?.evidence !== "検証済み").length,
+      iterated: harness.branches.filter((item) => item.loops.length > 1).length,
+    };
+  }, [harness.branches]);
 
   return (
     <div className="page-shell harness-page">
@@ -22,6 +31,13 @@ export default function HarnessBoard({ harness }: { harness: Harness }) {
         </div>
         <div className="harness-rule"><ShieldCheck size={18} /><span>{harness.rule}<br /><br />{harness.modelPolicy}<br /><br /><b>提出品質の基準：</b>{harness.submissionRule}</span></div>
       </div>
+
+      <section className="harness-overview" aria-label="ハーネスの現在地">
+        <article><span>探索中の枝</span><b>{loopSummary.total}</b><small>公開情報から組み立てた生活場面</small></article>
+        <article><span>公開情報を確認</span><b>{loopSummary.publicEvidence}</b><small>根拠と仮説を分けて記録済み</small></article>
+        <article><span>人の確認待ち</span><b>{loopSummary.humanCheck}</b><small>点数だけで結論にしない候補</small></article>
+        <article><span>複数ループ済み</span><b>{loopSummary.iterated}</b><small>初稿から改善履歴を持つ枝</small></article>
+      </section>
 
       <section className="branch-section">
         <div className="section-heading"><div><span className="card-label">CONCEPT BRANCHES</span><h2>探索の枝を切り替える</h2></div><GitBranch size={20} /></div>
