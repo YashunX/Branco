@@ -18,6 +18,7 @@ const generatedPreviews: Record<string, Pick<PrototypePreview, "front" | "inside
   "treatment-window": { front: "治療のために、言い直さない", inside: "時間をずらす ／ まず相談する", interaction: "診断名の必須入力・上司への病歴説明・同僚への一斉通知・利用回数のランキングを求めず、職場が選択肢と情報の境界を先に渡す。" },
   "reading-shape": { front: "読める形を、先に選ぶ", inside: "音で聞く ／ 文字を変える", interaction: "障害名の申告・診断書・読書履歴の共有・利用回数の記録・感想投稿を求めず、図書館が読み方と利用条件を先に渡す。" },
   "language-first": { front: "話す言葉を、先に選ぶ", inside: "英語 ／ 住まい ／ 15時まで", interaction: "国籍の申告・在留カードの撮影・住所の記入・相談履歴の共有・同伴者の登録を求めず、窓口が言語と利用条件を先に渡す。" },
+  "team-can-rest": { front: "当番にも、休む場所がある", inside: "代替 ／ 中止 ／ 次回", interaction: "休む理由・代役探し・欠席回数の集計・感謝の投稿・次回参加の約束を求めず、チームが代替と中止の判断を先に持つ。" },
 };
 
 export default function Reports() {
@@ -50,7 +51,7 @@ export default function Reports() {
 
     <section className="story-candidate-section">
       <div className="section-heading"><div><span className="card-label">ZERO-BASE HYPOTHESES / FIRST DRAFTS</span><h2>{briefs.length}の応援の物語</h2></div><Sparkles size={20} /></div>
-      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は、国籍の申告、在留カードの撮影、住所の記入、相談履歴の共有を入口から外し、窓口が使う言葉と利用条件を先に渡す形へ絞った。</p>
+      <p className="story-section-intro">公開情報を出発点にした{briefs.length}案。根拠と仮説を分け、背景から最初の体験までを同じ順番で記す。人の確認が入るまでは、どれも完成案として扱わない。最新案は、休む理由、代役探し、欠席回数、次回参加の約束を入口から外し、チームが代替・中止・次の確認を先に持つ形へ絞った。</p>
       <div className="story-candidates">
         {activeBriefs.map((brief) => {
           const index = briefs.findIndex((item) => item.id === brief.id);
@@ -73,7 +74,7 @@ export default function Reports() {
       <div className="section-heading"><div><span className="card-label">PRODUCTION MEMO / AFTER THE STORY</span><h2 id="production-memo-title">制作メモ</h2></div><Clock3 size={20} /></div>
       <p className="story-memo-intro">ここからは提出ストーリーを補う記録。本文の結論と混ぜずに、生成日時・人のフィードバックの有無・次に確認する問いを残す。</p>
       <div className="story-memo-facts">
-        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #048</strong><p>第二十八枝『話す言葉を、先に選ぶ』を辛口評価して改善した。国籍の申告、在留カードの撮影、住所の記入、相談履歴の共有を捨て、使う言葉と利用条件を窓口側が先に渡す形へ絞った。</p></article>
+        <article><span>今回の生成・更新</span><strong>{harness.updatedAt}<br />白紙化後 Loop #049</strong><p>第二十九枝『当番にも、休む場所がある』を辛口評価して改善した。休む理由、代役探し、欠席回数、次回参加の約束を捨て、チームが代替・中止・次の確認を先に持つ形へ絞った。</p></article>
         <article><span>人からのフィードバック</span><strong>まだ未取得</strong><p>存在しない意見は補わない。先生・メンバーから受け取ったら、日時・相手・要旨・反映内容をここに追記する。</p></article>
         <article><span>このレポートの位置づけ</span><strong>プレ審査用<br />検証前ドラフト</strong><p>完成を装わず、どこが仮説なのかを明示したうえで、提出品質まで磨くための版。</p></article>
       </div>
