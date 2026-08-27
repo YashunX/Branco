@@ -84,7 +84,7 @@ export default function Reports() {
             <div className="story-flow">{steps.map((step, stepIndex) => <div key={storySteps[stepIndex]}><span>0{stepIndex + 1}</span><section><b>{storySteps[stepIndex]}</b><p>{step}</p></section></div>)}</div>
             <div className="story-scene"><span>最初の10秒</span><p>{brief.presentationScene}</p><div className="story-object"><div>{prototype.front}</div><div>{prototype.inside}</div></div><small>{prototype.interaction}</small></div>
             <div className="story-form-reason"><b>なぜ、この物なのか</b><p>{brief.whyThisForm}</p></div>
-            {candidateSources.length > 0 && <div className="story-candidate-sources"><b>この案の出発点</b><div>{candidateSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>{source.name}<ExternalLink size={12} /></a>)}</div></div>}
+            {candidateSources.length > 0 && <div className="story-candidate-sources"><b>この案の出発点</b><div>{candidateSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><span>{source.name}<small>{source.usedFor}</small></span><ExternalLink size={12} /></a>)}</div></div>}
             <footer><b>まだ答えられていないこと</b><p>{brief.validation}</p></footer>
           </article>;
         })}
