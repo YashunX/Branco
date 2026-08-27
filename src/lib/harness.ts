@@ -17,12 +17,12 @@ export type ArchiveObservation = { observation: string; implication: string; sou
 export type PrototypePreview = { id: string; title: string; status: string; front: string; inside: string; interaction: string };
 
 export const scoreLabels: { key: keyof Score; label: string; max: number }[] = [
-  { key: "input", label: "INPUT", max: 30 }, { key: "concept", label: "CONCEPT", max: 30 }, { key: "output", label: "OUTPUT", max: 25 }, { key: "story", label: "STORY", max: 15 }, { key: "human", label: "人の直感", max: 10 },
+  { key: "input", label: "INPUT", max: 30 }, { key: "concept", label: "CONCEPT", max: 30 }, { key: "output", label: "OUTPUT", max: 25 }, { key: "story", label: "STORY", max: 15 }, { key: "human", label: "AI一次仮説", max: 10 },
 ];
 
 export const harness = {
   updatedAt: "2026.08.27",
-  rule: "旧案を引き継がず、毎回、公開情報・生活者の緊張・応援の再定義・最初の体験を新しく組み立てる。1枝につき発散・辛口評価・改善を行い、人の直感は点数より優先して残す。",
+  rule: "旧案を引き継がず、毎回、公開情報・生活者の緊張・応援の再定義・最初の体験を新しく組み立てる。1枝につき発散・辛口評価・改善を行う。AIの一次仮説は人の評価ではなく、人の言葉が入った時点で置き換える。",
   modelPolicy: "通常はTerraを使用。Solへの切替は、複数枝の統合判断・審査基準の再設計・最終ストーリーの矛盾解消など、深い推論が必要な局面に限定し、理由を記録する。",
   submissionRule: "各生成は、背景・人の緊張・応援の再定義・最初の体験・なぜその物か・プレ審査で見せる一場面・未検証点まで揃って初めて記録する。",
   branchingRule: "各枝は評価ごとに、継続・改善・保留して新規発散のいずれかを必ず選ぶ。二回連続で出力の核が変わらない、または診断が同じ負債を指す時は、その枝を保留し、前枝の物・言葉・対象を引き継がない新しい生活場面から次枝を発散する。人の確認待ちは停止条件ではない。",
